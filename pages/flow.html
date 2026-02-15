@@ -41,8 +41,9 @@
         <section class="detail-section">
             <h2>아키텍처</h2>
             <div class="image-placeholder">
-                <p>시스템 아키텍처 다이어그램</p>
-                <span>images/flow-architecture.png</span>
+                <img src="../images/flow-architecture.png" alt="Flow 시스템 아키텍처"
+                     onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block';">
+                <p class="fallback" style="display:none;">flow-architecture.png</p>
             </div>
             <p>
                 JEX 프레임워크 기반의 서버 아키텍처로, 클라이언트 요청이 Service XML &rarr; Action JSP &rarr; Service &rarr; Repository &rarr; IDO(DB) 순서로 처리됩니다.

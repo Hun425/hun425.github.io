@@ -571,6 +571,56 @@ a:hover {
     margin-bottom: 0;
 }
 
+/* 서브섹션 제목 (배경, 해결 과정, 결과) */
+.subsection-title {
+    font-size: 16px;
+    font-weight: 600;
+    margin-top: 24px;
+    margin-bottom: 12px;
+    color: var(--text-primary);
+    padding-left: 12px;
+    border-left: 3px solid var(--accent-color);
+}
+
+/* 상세 리스트 */
+.detail-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 16px;
+}
+
+.detail-list li {
+    font-size: 14px;
+    line-height: 1.8;
+    margin-bottom: 8px;
+    padding-left: 16px;
+    position: relative;
+}
+
+.detail-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--text-secondary);
+}
+
+.detail-list li code {
+    background-color: var(--code-bg);
+    padding: 1px 6px;
+    border-radius: 3px;
+    font-size: 13px;
+    font-family: 'SF Mono', 'Fira Code', monospace;
+}
+
+/* 결과 리스트 */
+.result-list li::before {
+    background-color: var(--accent-color);
+}
+
 /* 상세 페이지 Footer */
 .detail-footer {
     margin-top: 60px;

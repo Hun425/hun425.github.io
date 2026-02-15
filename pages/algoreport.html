@@ -22,10 +22,10 @@
             <p class="detail-role">알고리즘 커리큘럼 추천 서비스</p>
             <div class="tags">
                 <span class="tag">Kotlin</span>
-                <span class="tag">MSA</span>
-                <span class="tag">ELK Stack</span>
+                <span class="tag">Spring Boot</span>
                 <span class="tag">Kafka</span>
-                <span class="tag">Spring Cloud</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Debezium</span>
             </div>
         </header>
 
@@ -33,55 +33,41 @@
             <h2>프로젝트 개요</h2>
             <p>
                 사용자의 알고리즘 풀이 데이터를 분석하여 맞춤형 커리큘럼을 제공하는 서비스입니다.
-                MSA 환경에서의 데이터 정합성 보장에 집중하여, Saga와 Outbox 패턴을 적용한 분산 트랜잭션 처리가 핵심입니다.
+                여러 모듈에 걸친 비즈니스 로직에서 데이터 정합성을 보장하기 위해 Saga 및 Outbox 패턴을 적용한 분산 트랜잭션 처리가 핵심입니다.
             </p>
         </section>
 
+        <!-- ===== Saga & Outbox 패턴 ===== -->
         <section class="detail-section">
-            <h2>아키텍처</h2>
+            <h2>Saga 및 Outbox 패턴 기반의 분산 트랜잭션 구현</h2>
+
             <div class="image-placeholder">
-                <p>MSA 아키텍처 다이어그램</p>
-                <span>images/algoreport-architecture.png</span>
+                <img src="../images/algoreport-saga-architecture.png" alt="Saga & Outbox 패턴 아키텍처"
+                     onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block';">
+                <p class="fallback" style="display:none;">algoreport-saga-architecture.png</p>
             </div>
-        </section>
 
-        <section class="detail-section">
-            <h2>기술적 의사결정</h2>
-            <div class="decision-item">
-                <h3>Saga Pattern 도입</h3>
-                <div class="decision-body">
-                    <p><strong>배경:</strong> 사용자 서비스, 커리큘럼 서비스, 분석 서비스 등 여러 마이크로서비스에 걸친 트랜잭션 처리가 필요했습니다. 분산 환경에서 2PC(Two-Phase Commit)는 성능과 가용성 측면에서 부적합했습니다.</p>
-                    <p><strong>선택:</strong> Choreography 기반의 Saga 패턴을 도입하여, 각 서비스가 로컬 트랜잭션을 수행하고 이벤트를 통해 다음 단계를 트리거하는 방식으로 구현했습니다.</p>
-                    <p><strong>결과:</strong> 서비스 간 결합도를 낮추면서도 최종 일관성(Eventual Consistency)을 보장할 수 있게 되었습니다.</p>
-                </div>
-            </div>
-            <div class="decision-item">
-                <h3>Outbox Pattern으로 이벤트 발행 보장</h3>
-                <div class="decision-body">
-                    <p><strong>배경:</strong> Saga 패턴에서 로컬 트랜잭션 커밋과 이벤트 발행 사이에 실패가 발생하면, 데이터 불일치가 생길 수 있었습니다.</p>
-                    <p><strong>선택:</strong> Outbox 패턴을 적용하여 이벤트를 DB의 Outbox 테이블에 먼저 저장하고, 별도 폴러(Poller)가 이를 읽어 Kafka로 발행하는 방식으로 '최소 한 번 발행'을 보장했습니다.</p>
-                    <p><strong>결과:</strong> 네트워크 장애나 서비스 다운 상황에서도 이벤트 유실 없이 데이터 일관성을 확보했습니다.</p>
-                </div>
-            </div>
-            <div class="decision-item">
-                <h3>ELK Stack 기반 로그 모니터링</h3>
-                <div class="decision-body">
-                    <p><strong>배경:</strong> MSA 환경에서 여러 서비스에 분산된 로그를 통합 관리하고, 장애 발생 시 빠르게 추적할 수 있는 체계가 필요했습니다.</p>
-                    <p><strong>선택:</strong> Elasticsearch + Logstash + Kibana 스택을 도입하여 전체 서비스의 로그를 중앙 집중적으로 수집, 검색, 시각화했습니다.</p>
-                    <p><strong>결과:</strong> 분산 트레이싱이 가능해져 서비스 간 이벤트 흐름을 한 눈에 파악하고 문제를 빠르게 진단할 수 있게 되었습니다.</p>
-                </div>
-            </div>
-        </section>
+            <h3 class="subsection-title">배경 및 문제 원인</h3>
+            <ul class="detail-list">
+                <li>여러 모듈에 걸쳐 실행되는 비즈니스 로직(예: 사용자 가입 시 프로필 생성 및 환영 알림 등)에서 <strong>데이터 정합성 보장</strong> 요구사항 발생</li>
+                <li>모듈형 모놀리스 또는 마이크로서비스 환경에서는 단일 ACID 트랜잭션으로 모든 데이터 변경을 묶을 수 없어, 처리 과정 중 일부 장애 시 데이터 불일치 문제 발생</li>
+            </ul>
 
-        <section class="detail-section">
-            <h2>트러블 슈팅</h2>
-            <div class="trouble-shooting">
-                <p><strong>Problem:</strong> 분산 환경 데이터 정합성</p>
-                <p class="ts-detail">마이크로서비스 간 트랜잭션 분리로 인해, 한 서비스의 트랜잭션은 성공했으나 후속 서비스의 처리가 실패하는 경우 데이터 불일치가 발생했습니다.</p>
-                <p><strong>Solution:</strong> Saga & Outbox Pattern</p>
-                <p class="ts-detail">Saga 패턴으로 분산 트랜잭션을 로컬 트랜잭션 + 보상 트랜잭션으로 분리하고, Outbox 패턴으로 이벤트 발행의 원자성을 보장하여 데이터 일관성을 확보했습니다.</p>
-                <p class="ts-result"><strong>Result:</strong> 분산 환경에서 최종 일관성 보장, 이벤트 유실 0건 달성</p>
-            </div>
+            <h3 class="subsection-title">해결 과정</h3>
+            <ul class="detail-list">
+                <li>분산 트랜잭션 문제를 해결하기 위해 <strong>Saga 패턴(Orchestration-based)</strong> 도입</li>
+                <li>각 비즈니스 로직을 여러 단계의 로컬 트랜잭션으로 분리하고, 실패 시 <strong>보상 트랜잭션(Compensating Transaction)</strong>을 실행하여 데이터 일관성을 최종적으로 보장</li>
+                <li><code>UserRegistrationSaga</code>, <code>InitialDataSyncSaga</code> 등 각 시나리오에 맞는 Saga 구현체를 작성하여 트랜잭션 흐름을 중앙에서 관리(Orchestrator)</li>
+                <li>로컬 트랜잭션 커밋과 이벤트 메시지 발행을 원자적으로 보장하기 위해 <strong>Outbox 패턴</strong> 적용</li>
+                <li>비즈니스 데이터 변경과 발행할 이벤트를 동일한 DB 트랜잭션으로 묶어 <code>outbox_events</code> 테이블에 저장</li>
+                <li>별도의 이벤트 발행기(<strong>Debezium</strong>)가 Outbox 테이블을 폴링하여 메시지 브로커(Kafka)에 이벤트를 안정적으로 발행 &mdash; <strong>'최소 한 번 발행(At-Least-Once Delivery)'</strong> 보장</li>
+            </ul>
+
+            <h3 class="subsection-title">결과</h3>
+            <ul class="detail-list result-list">
+                <li>특정 모듈의 장애가 전체 시스템의 데이터 불일치로 확산되는 것을 방지하여 시스템의 <strong>안정성과 회복탄력성(Resilience)</strong> 향상</li>
+                <li>Saga 패턴을 통해 각 모듈의 비즈니스 로직이 명확해지고, 모듈 간의 <strong>결합도를 낮추어 유지보수성 및 확장성</strong> 확보</li>
+            </ul>
         </section>
 
         <footer class="detail-footer">

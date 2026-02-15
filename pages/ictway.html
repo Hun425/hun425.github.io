@@ -25,6 +25,7 @@
                 <span class="tag">Spring Boot</span>
                 <span class="tag">Apache Kafka</span>
                 <span class="tag">Apache Spark</span>
+                <span class="tag">Elasticsearch</span>
                 <span class="tag">PostgreSQL</span>
             </div>
         </header>
@@ -32,21 +33,9 @@
         <section class="detail-section">
             <h2>프로젝트 개요</h2>
             <p>
-                환경부 대기정책 시스템의 2차년도 구축 프로젝트에서 백엔드 개발을 담당했습니다.
+                환경부 대기정책 시스템(교통환경관리시스템, TEMS)의 2차년도 구축 프로젝트에서 백엔드 개발을 담당했습니다.
                 전국 도로의 차량 속도 데이터를 수집, 가공하여 대기 오염 모델링에 활용하는 시스템으로,
-                하루 수억 건의 차량 속도 데이터를 안정적으로 처리하는 것이 핵심 과제였습니다.
-            </p>
-        </section>
-
-        <section class="detail-section">
-            <h2>아키텍처</h2>
-            <div class="image-placeholder">
-                <p>아키텍처 다이어그램 이미지</p>
-                <span>images/ictway-architecture.png</span>
-            </div>
-            <p>
-                Apache Kafka를 통해 차량 속도 데이터를 실시간으로 수집하고,
-                Apache Spark로 분산 처리하여 집계된 결과를 PostgreSQL에 저장하는 파이프라인을 설계했습니다.
+                하루 수억 건의 데이터 처리와 약 2,260만 건의 차량 등록 데이터 검색 성능 최적화가 핵심 과제였습니다.
             </p>
         </section>
 
@@ -56,43 +45,73 @@
                 <div class="achievement-card">
                     <span class="achievement-number">60%</span>
                     <p class="achievement-label">저장 성능 최적화</p>
-                    <p class="achievement-desc">DB 비동기 인덱스 전략 도입<br>100분 &rarr; 40분</p>
+                    <p class="achievement-desc">DB 비동기 인덱스 전략<br>100분 &rarr; 40분</p>
                 </div>
                 <div class="achievement-card">
                     <span class="achievement-number">60%</span>
                     <p class="achievement-label">배치 파이프라인 단축</p>
-                    <p class="achievement-desc">전체 배치 처리 소요 시간<br>10일 &rarr; 4일</p>
+                    <p class="achievement-desc">전체 배치 처리 시간<br>10일 &rarr; 4일</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-number">90%</span>
+                    <p class="achievement-label">검색 성능 개선</p>
+                    <p class="achievement-desc">Elasticsearch 도입<br>20초 &rarr; 2초</p>
                 </div>
             </div>
         </section>
 
+        <!-- ===== Elasticsearch 검색 최적화 ===== -->
+        <section class="detail-section">
+            <h2>Elasticsearch 도입을 통한 대용량 데이터 검색 성능 최적화</h2>
+
+            <div class="image-placeholder">
+                <img src="../images/ictway-elasticsearch-architecture.png" alt="Elasticsearch 하이브리드 아키텍처"
+                     onerror="this.style.display='none'; this.parentElement.querySelector('.fallback').style.display='block';">
+                <p class="fallback" style="display:none;">ictway-elasticsearch-architecture.png</p>
+            </div>
+
+            <h3 class="subsection-title">배경 및 문제 원인</h3>
+            <ul class="detail-list">
+                <li>교통환경관리시스템(TEMS)에서 약 <strong>2,260만 건</strong>의 차량 등록 데이터 관리 중, PostgreSQL 기반 검색 기능의 심각한 성능 문제 발생</li>
+                <li>여러 검색 조건을 포함한 상태에서 마지막 페이지로 이동할 경우, 응답 시간이 <strong>최대 20초</strong>까지 소요</li>
+                <li>근본 원인: PostgreSQL의 <code>LIKE '%검색어%'</code> 구문이 인덱스를 활용하지 못해 Full Table Scan 유발, <code>OFFSET</code> 기반 페이지네이션이 뒤쪽 페이지로 갈수록 선형적으로 성능 저하</li>
+            </ul>
+
+            <h3 class="subsection-title">해결 과정</h3>
+            <ul class="detail-list">
+                <li><strong>Elasticsearch 도입</strong> &mdash; 역색인(Inverted Index) 구조를 활용하여 데이터 접근 방식을 근본적으로 개선</li>
+                <li>데이터 정합성이 중요한 원본 데이터는 PostgreSQL에 유지, 검색은 Elasticsearch가 전담하는 <strong>하이브리드 아키텍처</strong> 설계</li>
+                <li>약 2,260만 건의 대용량 데이터를 안정적으로 이전하기 위해 <strong>배치 기반 마이그레이션 프로세스</strong> 구축 (5만 건씩 처리)</li>
+                <li>비효율적인 <code>LIKE</code> 쿼리를 Elasticsearch의 <code>Bool Query</code>와 <code>Wildcard Query</code>를 조합한 네이티브 쿼리로 대체</li>
+                <li><code>max_result_window</code> 기본값(10,000) 제한을 해제하여 Deep Pagination 문제 해결</li>
+            </ul>
+
+            <h3 class="subsection-title">결과</h3>
+            <ul class="detail-list result-list">
+                <li>검색 조건 포함 마지막 페이지 조회 속도 <strong>20초 &rarr; 2초</strong> (약 90% 성능 개선)</li>
+                <li>페이지 번호와 상관없이 일정한 응답 속도를 보장하여 시스템 안정성 확보</li>
+                <li>검색 부하를 Elasticsearch로 분산시켜 메인 DB PostgreSQL의 <strong>부하 약 70% 감소</strong></li>
+            </ul>
+        </section>
+
+        <!-- ===== 배치 파이프라인 최적화 ===== -->
         <section class="detail-section">
             <h2>기술적 의사결정</h2>
             <div class="decision-item">
                 <h3>Kafka + Spark 분산 처리 아키텍처</h3>
                 <div class="decision-body">
-                    <p><strong>배경:</strong> 전국 도로 구간별 차량 속도 데이터가 실시간으로 대량 유입되어, 단일 서버에서는 처리가 불가능한 상황이었습니다.</p>
-                    <p><strong>선택:</strong> Kafka로 데이터를 토픽별로 분리 수집하고, Spark의 병렬 처리 능력을 활용하여 구간별 집계를 수행했습니다.</p>
-                    <p><strong>결과:</strong> 수평 확장이 가능한 구조로, 데이터 증가에도 안정적인 처리량을 유지할 수 있게 되었습니다.</p>
+                    <p><strong>배경:</strong> 전국 도로 구간별 차량 속도 데이터가 실시간으로 대량 유입되어, 단일 서버에서는 처리가 불가능한 상황</p>
+                    <p><strong>선택:</strong> Kafka로 데이터를 토픽별로 분리 수집하고, Spark의 병렬 처리 능력을 활용하여 구간별 집계 수행</p>
+                    <p><strong>결과:</strong> 수평 확장이 가능한 구조로, 데이터 증가에도 안정적인 처리량 유지</p>
                 </div>
             </div>
             <div class="decision-item">
                 <h3>DB 비동기 인덱스 전략</h3>
                 <div class="decision-body">
-                    <p><strong>배경:</strong> 대량 데이터 INSERT 시 인덱스 갱신으로 인한 병목이 발생하여, 저장 시간이 100분 이상 소요되었습니다.</p>
-                    <p><strong>선택:</strong> 데이터 적재 시 인덱스를 일시 제거하고, 적재 완료 후 비동기로 인덱스를 재생성하는 전략을 도입했습니다.</p>
-                    <p><strong>결과:</strong> 저장 성능 60% 최적화 (100분 &rarr; 40분)를 달성했습니다.</p>
+                    <p><strong>배경:</strong> 대량 데이터 INSERT 시 인덱스 갱신으로 인한 병목이 발생하여, 저장 시간이 100분 이상 소요</p>
+                    <p><strong>선택:</strong> 데이터 적재 시 인덱스를 일시 제거하고, 적재 완료 후 비동기로 인덱스를 재생성하는 전략 도입</p>
+                    <p><strong>결과:</strong> 저장 성능 60% 최적화 (100분 &rarr; 40분), 전체 배치 10일 &rarr; 4일로 단축</p>
                 </div>
-            </div>
-        </section>
-
-        <section class="detail-section">
-            <h2>트러블 슈팅</h2>
-            <div class="trouble-shooting">
-                <p><strong>Problem:</strong> 배치 처리 파이프라인 전체 소요 시간 10일</p>
-                <p class="ts-detail">기존 시스템은 단일 프로세스로 순차 처리하여, 한 달치 데이터를 처리하는 데 10일이 소요되었습니다. 데이터 증가에 따라 처리 기한을 초과할 위험이 있었습니다.</p>
-                <p><strong>Solution:</strong> Kafka 파티셔닝 + Spark 병렬 처리 + DB 비동기 인덱스 전략을 조합하여, 데이터 수집-가공-저장 전 구간을 최적화했습니다.</p>
-                <p class="ts-result"><strong>Result:</strong> 전체 배치 처리 시간 10일 &rarr; 4일로 약 60% 단축</p>
             </div>
         </section>
 
