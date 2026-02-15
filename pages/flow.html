@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Madras Check (Flow) | 채기훈</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+</head>
+<body>
+
+    <div class="detail-page">
+        <nav class="detail-nav">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </nav>
+
+        <header class="detail-header">
+            <div class="detail-header-top">
+                <h1>Madras Check (Flow)</h1>
+                <span class="period">2025.06 ~ Current</span>
+            </div>
+            <p class="detail-role">엔터프라이즈 서비스 백엔드 개발</p>
+            <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">JSP</span>
+                <span class="tag">PostgreSQL</span>
+                <span class="tag">Redis</span>
+                <span class="tag">JavaScript</span>
+            </div>
+        </header>
+
+        <section class="detail-section">
+            <h2>프로젝트 개요</h2>
+            <p>
+                협업 도구 Flow의 엔터프라이즈 서비스 백엔드 개발을 담당하고 있습니다.
+                LH, 삼성화재 등 대규모 고객사를 대상으로 한 커스터마이징 기능 개발과
+                레거시 JEX 프레임워크 기반 시스템의 성능 최적화를 수행합니다.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>아키텍처</h2>
+            <div class="image-placeholder">
+                <p>시스템 아키텍처 다이어그램</p>
+                <span>images/flow-architecture.png</span>
+            </div>
+            <p>
+                JEX 프레임워크 기반의 서버 아키텍처로, 클라이언트 요청이 Service XML &rarr; Action JSP &rarr; Service &rarr; Repository &rarr; IDO(DB) 순서로 처리됩니다.
+                프론트엔드는 모듈화된 JavaScript 컴포넌트와 무한 스크롤 기반 페이징을 사용합니다.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>주요 성과</h2>
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <span class="achievement-number">O(N+M)</span>
+                    <p class="achievement-label">알고리즘 최적화</p>
+                    <p class="achievement-desc">O(N&times;M) 중첩 루프를<br>HashMap 기반으로 개선</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-number">98%</span>
+                    <p class="achievement-label">초기 로딩 데이터 감소</p>
+                    <p class="achievement-desc">5000건 일괄 조회를<br>50건 페이징으로 전환</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>기술적 의사결정</h2>
+            <div class="decision-item">
+                <h3>O(N&times;M) &rarr; O(N+M) HashMap 기반 최적화</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> 프로젝트 내부 그룹-사용자 매칭 로직이 중첩 루프로 구현되어 있어, 그룹 수(N) &times; 사용자 수(M)만큼 반복하며 대규모 프로젝트에서 성능 저하가 발생했습니다.</p>
+                    <p><strong>선택:</strong> 사용자 데이터를 한 번의 패스로 HashMap&lt;groupSrno, List&lt;User&gt;&gt;에 매핑한 뒤, 그룹 순회 시 O(1) 조회하는 방식으로 변경했습니다.</p>
+                    <p><strong>결과:</strong> 시간 복잡도가 O(N+M)으로 개선되었으며, LH 등 대규모 사용자를 보유한 고객사에서 체감 성능이 향상되었습니다.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <h3>서버사이드 페이징 (LIMIT/OFFSET) 도입</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> 기존에는 PG_PER_CNT=5000으로 사실상 전건 조회하여 프론트에서 렌더링하고 있었습니다. 대규모 프로젝트에서 초기 로딩 시간과 메모리 사용량이 문제였습니다.</p>
+                    <p><strong>선택:</strong> 서버에서 50건씩 LIMIT/OFFSET으로 잘라 응답하고, 프론트에서 무한 스크롤로 추가 로드하는 방식을 도입했습니다. IDO에 LIMITDYNAMIC 필드가 없어 ORDERDYNAMIC에 LIMIT을 합치는 우회 방식을 사용했습니다.</p>
+                    <p><strong>결과:</strong> 초기 로딩 데이터량 98% 감소 (5000건 &rarr; 50건), DOM 렌더링 부하 해소</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>트러블 슈팅</h2>
+            <div class="trouble-shooting">
+                <p><strong>Problem:</strong> 프로젝트 그룹 생성 시 선택한 대로 반영되지 않고 전체가 초대됨</p>
+                <p class="ts-detail">그룹 생성 팝업에서 사용자를 선택 후 저장하면, 선택 여부와 관계없이 전체 사용자가 그룹에 추가되는 버그가 발생했습니다.</p>
+                <p><strong>Solution:</strong> 프론트엔드의 체크박스 상태 수집 로직을 분석하여, 오른쪽 패널에 이미 선택된 사용자 ID를 정확히 필터링하고 서버에 전달하도록 수정했습니다.</p>
+                <p class="ts-result"><strong>Result:</strong> 사용자 선택이 정확히 반영되며, 관련 이슈 해소</p>
+            </div>
+        </section>
+
+        <footer class="detail-footer">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </footer>
+    </div>
+</body>
+</html>

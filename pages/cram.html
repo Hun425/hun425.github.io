@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cram | 채기훈</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+</head>
+<body>
+
+    <div class="detail-page">
+        <nav class="detail-nav">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </nav>
+
+        <header class="detail-header">
+            <div class="detail-header-top">
+                <h1>Cram</h1>
+                <span class="period">팀 프로젝트 (팀장) | 2025.03 ~ Current</span>
+            </div>
+            <p class="detail-role">실시간 퀴즈 배틀 플랫폼</p>
+            <div class="tags">
+                <span class="tag">Spring Boot</span>
+                <span class="tag">WebSocket</span>
+                <span class="tag">STOMP</span>
+                <span class="tag">Redis</span>
+                <span class="tag">Caffeine Cache</span>
+            </div>
+        </header>
+
+        <section class="detail-section">
+            <h2>프로젝트 개요</h2>
+            <p>
+                Spring WebSocket과 STOMP를 활용하여 사용자가 실시간으로 경쟁하며 학습할 수 있는 퀴즈 배틀 서비스입니다.
+                다수의 사용자가 동시에 같은 퀴즈 세션에 참여하여 실시간으로 점수를 겨루는 기능을 제공합니다.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>아키텍처</h2>
+            <div class="image-placeholder">
+                <p>실시간 통신 아키텍처 다이어그램</p>
+                <span>images/cram-architecture.png</span>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>주요 성과</h2>
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <span class="achievement-number">70%</span>
+                    <p class="achievement-label">조회 응답 속도 단축</p>
+                    <p class="achievement-desc">Caffeine Local Cache 적용으로<br>DB 직접 조회 최소화</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-number">0%</span>
+                    <p class="achievement-label">실패율 (개선 후)</p>
+                    <p class="achievement-desc">기존 12.17% 실패율에서<br>안정적인 서비스로 개선</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>기술적 의사결정</h2>
+            <div class="decision-item">
+                <h3>WebSocket + STOMP 프로토콜 선택</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> 퀴즈 배틀의 특성상 서버-클라이언트 간 양방향 실시간 통신이 필수적이었습니다.</p>
+                    <p><strong>선택:</strong> Spring WebSocket에 STOMP 프로토콜을 결합하여, 메시지 브로커 기반의 구독/발행 패턴으로 구현했습니다.</p>
+                    <p><strong>결과:</strong> 세션별 참가자 관리와 실시간 점수 브로드캐스팅을 효율적으로 처리할 수 있게 되었습니다.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <h3>Caffeine Local Cache 전략</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> 인기 퀴즈 데이터에 대한 반복 조회로 DB 병목이 발생하여 실패율이 12.17%에 달했습니다.</p>
+                    <p><strong>선택:</strong> 자주 조회되는 퀴즈 데이터를 Caffeine 로컬 캐시에 적재하고, 데이터 변경 시 @CacheEvict로 정합성을 관리했습니다.</p>
+                    <p><strong>결과:</strong> DB 부하가 해소되면서 조회 API 응답 속도 70% 단축, 실패율 0%를 달성했습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>트러블 슈팅</h2>
+            <div class="trouble-shooting">
+                <p><strong>Problem:</strong> 반복 조회로 인한 DB 병목 (실패율 12.17%)</p>
+                <p class="ts-detail">인기 퀴즈 조회 시 다수의 사용자가 동시에 DB에 접근하면서 커넥션 풀이 소진되고, 응답 지연 및 실패가 발생했습니다.</p>
+                <p><strong>Solution:</strong> Caffeine Local Cache 적용</p>
+                <p class="ts-detail">자주 조회되는 퀴즈 데이터를 로컬 캐시에 적재하여 DB 접근을 최소화했습니다. 데이터 변경 시 @CacheEvict 어노테이션으로 캐시를 무효화하여 정합성을 유지했습니다.</p>
+                <p class="ts-result"><strong>Result:</strong> 조회 API 평균 응답 속도 70% 단축 및 DB 부하 해소, 실패율 12.17% &rarr; 0%</p>
+            </div>
+        </section>
+
+        <footer class="detail-footer">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </footer>
+    </div>
+</body>
+</html>

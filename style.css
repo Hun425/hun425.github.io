@@ -355,6 +355,229 @@ a:hover {
     color: var(--text-primary);
 }
 
+/* 클릭 가능한 카드 */
+.card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
+.card-link:hover {
+    opacity: 1;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.timeline-item.clickable {
+    border-left-color: var(--accent-color);
+    transition: background-color 0.2s;
+}
+
+.timeline-item.clickable:hover {
+    background-color: var(--sidebar-bg);
+    border-radius: 0 6px 6px 0;
+}
+
+.card-summary {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    margin-bottom: 8px;
+    line-height: 1.5;
+}
+
+.view-detail {
+    font-size: 13px;
+    color: var(--accent-color);
+    font-weight: 500;
+    display: inline-block;
+    margin-top: 4px;
+    transition: transform 0.2s;
+}
+
+.clickable:hover .view-detail {
+    transform: translateX(4px);
+}
+
+/* ===== 상세 페이지 ===== */
+.detail-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 40px 32px 80px;
+}
+
+.detail-nav {
+    margin-bottom: 40px;
+}
+
+.back-link {
+    font-size: 14px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.back-link:hover {
+    color: var(--text-primary);
+    opacity: 1;
+}
+
+.detail-header {
+    margin-bottom: 48px;
+    padding-bottom: 32px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 8px;
+}
+
+.detail-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.detail-header .period {
+    font-size: 14px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.detail-role {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-bottom: 16px;
+}
+
+.detail-header .tags {
+    margin-top: 8px;
+}
+
+/* 상세 페이지 섹션 */
+.detail-section {
+    margin-bottom: 48px;
+}
+
+.detail-section h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.detail-section > p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+/* 이미지 플레이스홀더 */
+.image-placeholder {
+    background-color: var(--sidebar-bg);
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 48px 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.image-placeholder p {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.image-placeholder span {
+    font-size: 12px;
+    color: var(--border-color);
+    font-family: monospace;
+}
+
+.image-placeholder img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+/* 성과 카드 */
+.achievement-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+}
+
+.achievement-card {
+    background-color: var(--sidebar-bg);
+    border-radius: 8px;
+    padding: 24px;
+    text-align: center;
+}
+
+.achievement-number {
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--text-primary);
+    display: block;
+    margin-bottom: 8px;
+}
+
+.achievement-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+}
+
+.achievement-desc {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+}
+
+/* 기술적 의사결정 */
+.decision-item {
+    margin-bottom: 24px;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.decision-item h3 {
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px 20px;
+    background-color: var(--sidebar-bg);
+    margin: 0;
+}
+
+.decision-body {
+    padding: 20px;
+}
+
+.decision-body p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+}
+
+.decision-body p:last-child {
+    margin-bottom: 0;
+}
+
+/* 상세 페이지 Footer */
+.detail-footer {
+    margin-top: 60px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+
 /* Footer */
 .footer {
     margin-top: 40px;
@@ -393,5 +616,18 @@ a:hover {
     .project-header {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .detail-page {
+        padding: 24px 20px 60px;
+    }
+
+    .detail-header-top {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .achievement-grid {
+        grid-template-columns: 1fr;
     }
 }

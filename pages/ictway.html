@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ICTWAY | 채기훈</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+</head>
+<body>
+
+    <div class="detail-page">
+        <nav class="detail-nav">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </nav>
+
+        <header class="detail-header">
+            <div class="detail-header-top">
+                <h1>ICTWAY</h1>
+                <span class="period">2024.12 ~ Current</span>
+            </div>
+            <p class="detail-role">SI 사업본부 백엔드 개발 / 대기정책 시스템 2차년도 구축</p>
+            <div class="tags">
+                <span class="tag">Java</span>
+                <span class="tag">Spring Boot</span>
+                <span class="tag">Apache Kafka</span>
+                <span class="tag">Apache Spark</span>
+                <span class="tag">PostgreSQL</span>
+            </div>
+        </header>
+
+        <section class="detail-section">
+            <h2>프로젝트 개요</h2>
+            <p>
+                환경부 대기정책 시스템의 2차년도 구축 프로젝트에서 백엔드 개발을 담당했습니다.
+                전국 도로의 차량 속도 데이터를 수집, 가공하여 대기 오염 모델링에 활용하는 시스템으로,
+                하루 수억 건의 차량 속도 데이터를 안정적으로 처리하는 것이 핵심 과제였습니다.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>아키텍처</h2>
+            <div class="image-placeholder">
+                <p>아키텍처 다이어그램 이미지</p>
+                <span>images/ictway-architecture.png</span>
+            </div>
+            <p>
+                Apache Kafka를 통해 차량 속도 데이터를 실시간으로 수집하고,
+                Apache Spark로 분산 처리하여 집계된 결과를 PostgreSQL에 저장하는 파이프라인을 설계했습니다.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>주요 성과</h2>
+            <div class="achievement-grid">
+                <div class="achievement-card">
+                    <span class="achievement-number">60%</span>
+                    <p class="achievement-label">저장 성능 최적화</p>
+                    <p class="achievement-desc">DB 비동기 인덱스 전략 도입<br>100분 &rarr; 40분</p>
+                </div>
+                <div class="achievement-card">
+                    <span class="achievement-number">60%</span>
+                    <p class="achievement-label">배치 파이프라인 단축</p>
+                    <p class="achievement-desc">전체 배치 처리 소요 시간<br>10일 &rarr; 4일</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>기술적 의사결정</h2>
+            <div class="decision-item">
+                <h3>Kafka + Spark 분산 처리 아키텍처</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> 전국 도로 구간별 차량 속도 데이터가 실시간으로 대량 유입되어, 단일 서버에서는 처리가 불가능한 상황이었습니다.</p>
+                    <p><strong>선택:</strong> Kafka로 데이터를 토픽별로 분리 수집하고, Spark의 병렬 처리 능력을 활용하여 구간별 집계를 수행했습니다.</p>
+                    <p><strong>결과:</strong> 수평 확장이 가능한 구조로, 데이터 증가에도 안정적인 처리량을 유지할 수 있게 되었습니다.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <h3>DB 비동기 인덱스 전략</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> 대량 데이터 INSERT 시 인덱스 갱신으로 인한 병목이 발생하여, 저장 시간이 100분 이상 소요되었습니다.</p>
+                    <p><strong>선택:</strong> 데이터 적재 시 인덱스를 일시 제거하고, 적재 완료 후 비동기로 인덱스를 재생성하는 전략을 도입했습니다.</p>
+                    <p><strong>결과:</strong> 저장 성능 60% 최적화 (100분 &rarr; 40분)를 달성했습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>트러블 슈팅</h2>
+            <div class="trouble-shooting">
+                <p><strong>Problem:</strong> 배치 처리 파이프라인 전체 소요 시간 10일</p>
+                <p class="ts-detail">기존 시스템은 단일 프로세스로 순차 처리하여, 한 달치 데이터를 처리하는 데 10일이 소요되었습니다. 데이터 증가에 따라 처리 기한을 초과할 위험이 있었습니다.</p>
+                <p><strong>Solution:</strong> Kafka 파티셔닝 + Spark 병렬 처리 + DB 비동기 인덱스 전략을 조합하여, 데이터 수집-가공-저장 전 구간을 최적화했습니다.</p>
+                <p class="ts-result"><strong>Result:</strong> 전체 배치 처리 시간 10일 &rarr; 4일로 약 60% 단축</p>
+            </div>
+        </section>
+
+        <footer class="detail-footer">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </footer>
+    </div>
+</body>
+</html>

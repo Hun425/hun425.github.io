@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlgoReport | 채기훈</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+</head>
+<body>
+
+    <div class="detail-page">
+        <nav class="detail-nav">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </nav>
+
+        <header class="detail-header">
+            <div class="detail-header-top">
+                <h1>AlgoReport</h1>
+                <span class="period">개인 프로젝트 | 2025.04 ~ Current</span>
+            </div>
+            <p class="detail-role">알고리즘 커리큘럼 추천 서비스</p>
+            <div class="tags">
+                <span class="tag">Kotlin</span>
+                <span class="tag">MSA</span>
+                <span class="tag">ELK Stack</span>
+                <span class="tag">Kafka</span>
+                <span class="tag">Spring Cloud</span>
+            </div>
+        </header>
+
+        <section class="detail-section">
+            <h2>프로젝트 개요</h2>
+            <p>
+                사용자의 알고리즘 풀이 데이터를 분석하여 맞춤형 커리큘럼을 제공하는 서비스입니다.
+                MSA 환경에서의 데이터 정합성 보장에 집중하여, Saga와 Outbox 패턴을 적용한 분산 트랜잭션 처리가 핵심입니다.
+            </p>
+        </section>
+
+        <section class="detail-section">
+            <h2>아키텍처</h2>
+            <div class="image-placeholder">
+                <p>MSA 아키텍처 다이어그램</p>
+                <span>images/algoreport-architecture.png</span>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>기술적 의사결정</h2>
+            <div class="decision-item">
+                <h3>Saga Pattern 도입</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> 사용자 서비스, 커리큘럼 서비스, 분석 서비스 등 여러 마이크로서비스에 걸친 트랜잭션 처리가 필요했습니다. 분산 환경에서 2PC(Two-Phase Commit)는 성능과 가용성 측면에서 부적합했습니다.</p>
+                    <p><strong>선택:</strong> Choreography 기반의 Saga 패턴을 도입하여, 각 서비스가 로컬 트랜잭션을 수행하고 이벤트를 통해 다음 단계를 트리거하는 방식으로 구현했습니다.</p>
+                    <p><strong>결과:</strong> 서비스 간 결합도를 낮추면서도 최종 일관성(Eventual Consistency)을 보장할 수 있게 되었습니다.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <h3>Outbox Pattern으로 이벤트 발행 보장</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> Saga 패턴에서 로컬 트랜잭션 커밋과 이벤트 발행 사이에 실패가 발생하면, 데이터 불일치가 생길 수 있었습니다.</p>
+                    <p><strong>선택:</strong> Outbox 패턴을 적용하여 이벤트를 DB의 Outbox 테이블에 먼저 저장하고, 별도 폴러(Poller)가 이를 읽어 Kafka로 발행하는 방식으로 '최소 한 번 발행'을 보장했습니다.</p>
+                    <p><strong>결과:</strong> 네트워크 장애나 서비스 다운 상황에서도 이벤트 유실 없이 데이터 일관성을 확보했습니다.</p>
+                </div>
+            </div>
+            <div class="decision-item">
+                <h3>ELK Stack 기반 로그 모니터링</h3>
+                <div class="decision-body">
+                    <p><strong>배경:</strong> MSA 환경에서 여러 서비스에 분산된 로그를 통합 관리하고, 장애 발생 시 빠르게 추적할 수 있는 체계가 필요했습니다.</p>
+                    <p><strong>선택:</strong> Elasticsearch + Logstash + Kibana 스택을 도입하여 전체 서비스의 로그를 중앙 집중적으로 수집, 검색, 시각화했습니다.</p>
+                    <p><strong>결과:</strong> 분산 트레이싱이 가능해져 서비스 간 이벤트 흐름을 한 눈에 파악하고 문제를 빠르게 진단할 수 있게 되었습니다.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="detail-section">
+            <h2>트러블 슈팅</h2>
+            <div class="trouble-shooting">
+                <p><strong>Problem:</strong> 분산 환경 데이터 정합성</p>
+                <p class="ts-detail">마이크로서비스 간 트랜잭션 분리로 인해, 한 서비스의 트랜잭션은 성공했으나 후속 서비스의 처리가 실패하는 경우 데이터 불일치가 발생했습니다.</p>
+                <p><strong>Solution:</strong> Saga & Outbox Pattern</p>
+                <p class="ts-detail">Saga 패턴으로 분산 트랜잭션을 로컬 트랜잭션 + 보상 트랜잭션으로 분리하고, Outbox 패턴으로 이벤트 발행의 원자성을 보장하여 데이터 일관성을 확보했습니다.</p>
+                <p class="ts-result"><strong>Result:</strong> 분산 환경에서 최종 일관성 보장, 이벤트 유실 0건 달성</p>
+            </div>
+        </section>
+
+        <footer class="detail-footer">
+            <a href="../index.html" class="back-link">&larr; 돌아가기</a>
+        </footer>
+    </div>
+</body>
+</html>
