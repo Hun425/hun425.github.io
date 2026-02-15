@@ -1,0 +1,397 @@
+/* 기본 설정 */
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #37352f;
+    --text-secondary: #787774;
+    --accent-color: #2e2e2e;
+    --sidebar-bg: #f7f6f3;
+    --border-color: #e0e0e0;
+    --code-bg: #f7f6f3;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    color: var(--text-primary);
+    line-height: 1.6;
+    background-color: var(--bg-color);
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.2s;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+/* 레이아웃 */
+.container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* 사이드바 */
+.sidebar {
+    width: 280px;
+    background-color: var(--sidebar-bg);
+    padding: 48px 28px;
+    position: fixed;
+    height: 100vh;
+    border-right: 1px solid var(--border-color);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-icon {
+    width: 72px;
+    height: 72px;
+    background-color: #e0e0e0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+}
+
+.name {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.role {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.intro-short {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 48px;
+}
+
+.menu a {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    padding: 4px 0;
+}
+
+.menu a:hover {
+    color: #000;
+    text-decoration: underline;
+}
+
+.contact-info {
+    margin-top: auto;
+}
+
+.contact-info h3 {
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-info p {
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: var(--text-secondary);
+}
+
+.contact-info a {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+/* 메인 콘텐츠 */
+.content {
+    margin-left: 280px;
+    padding: 60px 80px;
+    width: 100%;
+    max-width: 960px;
+}
+
+.section {
+    margin-bottom: 72px;
+}
+
+.section-title {
+    font-size: 26px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+    margin-bottom: 28px;
+    font-weight: 700;
+}
+
+/* About Me */
+.callout {
+    background-color: var(--sidebar-bg);
+    padding: 24px 28px;
+    border-radius: 6px;
+    border-left: 3px solid #474747;
+}
+
+.callout p {
+    margin-bottom: 12px;
+    font-size: 15px;
+    line-height: 1.7;
+}
+
+.callout p:last-child {
+    margin-bottom: 0;
+}
+
+/* Skills */
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.skill-category {
+    padding: 20px;
+    background-color: var(--sidebar-bg);
+    border-radius: 6px;
+}
+
+.skill-category h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: var(--text-primary);
+}
+
+.skill-category p {
+    color: var(--text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+/* Work Experience */
+.timeline-item {
+    margin-bottom: 36px;
+    padding-left: 20px;
+    border-left: 2px solid var(--border-color);
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 6px;
+}
+
+.timeline-header h3 {
+    font-size: 19px;
+    font-weight: 600;
+}
+
+.timeline-header .period {
+    font-size: 13px;
+    color: var(--text-secondary);
+    white-space: nowrap;
+}
+
+.role-text {
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    color: var(--text-secondary);
+}
+
+.task-list {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.task-list li {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 1.6;
+    padding-left: 16px;
+    position: relative;
+}
+
+.task-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background-color: var(--text-secondary);
+}
+
+/* Project Cards */
+.project-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 28px;
+    margin-bottom: 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.project-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 4px;
+}
+
+.project-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.project-subtitle {
+    font-size: 15px;
+    color: var(--text-secondary);
+    margin-bottom: 4px;
+}
+
+.tags {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: var(--sidebar-bg);
+    padding: 3px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.project-meta {
+    font-size: 13px;
+    color: var(--text-secondary);
+    margin-bottom: 20px;
+}
+
+.project-body h4 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 22px;
+    margin-bottom: 10px;
+    padding-left: 12px;
+    border-left: 3px solid var(--accent-color);
+}
+
+.project-body > p {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.project-body ul {
+    padding-left: 20px;
+    margin-bottom: 8px;
+}
+
+.project-body ul li {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 4px;
+}
+
+/* Troubleshooting */
+.trouble-shooting {
+    background-color: #fafafa;
+    border: 1px solid var(--border-color);
+    padding: 20px 24px;
+    border-radius: 6px;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.trouble-shooting p {
+    margin-bottom: 4px;
+}
+
+.trouble-shooting .ts-detail {
+    color: var(--text-secondary);
+    margin-bottom: 12px;
+}
+
+.trouble-shooting .ts-result {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+    margin-bottom: 0;
+}
+
+.trouble-shooting strong {
+    color: var(--text-primary);
+}
+
+/* Footer */
+.footer {
+    margin-top: 40px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer p {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+/* 반응형 */
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+        padding: 32px 24px;
+    }
+
+    .content {
+        margin-left: 0;
+        padding: 40px 24px;
+    }
+
+    .timeline-header {
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    .project-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
