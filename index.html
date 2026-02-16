@@ -31,6 +31,18 @@
                 <p><a href="https://github.com/Hun425" target="_blank">GitHub</a></p>
                 <p><a href="https://velog.io/@chae0738/posts" target="_blank">Blog</a></p>
             </div>
+
+            <div class="visitor-stats">
+                <h3>Visitors</h3>
+                <div class="stat-row">
+                    <span class="stat-label">Today</span>
+                    <span class="stat-value" id="gc-today">-</span>
+                </div>
+                <div class="stat-row">
+                    <span class="stat-label">Total</span>
+                    <span class="stat-value" id="gc-total">-</span>
+                </div>
+            </div>
         </aside>
 
         <main class="content">
@@ -164,5 +176,57 @@
             </footer>
         </main>
     </div>
+    <!-- GoatCounter 추적 -->
+    <script data-goatcounter="https://hun425.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+
+    <!-- 방문자 카운터 표시 -->
+    <script>
+    (function() {
+        /*
+         * GoatCounter 설정 가이드:
+         * 1. https://goatcounter.com 가입 → 사이트 코드: hun425
+         * 2. Settings → "Allow adding visitor counts on your website" 활성화
+         * 3. (일일 방문자용) Settings → API tokens → 읽기 전용 토큰 생성 후 아래 token에 입력
+         *
+         * 본인 방문 제외:
+         *   https://hun425.github.io/#toggle-goatcounter 접속하면 토글됨
+         */
+        var GC = {
+            code: 'hun425',
+            token: ''  // API 토큰 입력 시 일일 방문자 표시 (없으면 Total만)
+        };
+
+        var base = 'https://' + GC.code + '.goatcounter.com';
+
+        // 총 방문자 (공개 API - 토큰 불필요)
+        var r = new XMLHttpRequest();
+        r.addEventListener('load', function() {
+            try {
+                var data = JSON.parse(this.responseText);
+                var el = document.getElementById('gc-total');
+                if (el) el.textContent = data.count_unique || data.count || '-';
+            } catch(e) {}
+        });
+        r.open('GET', base + '/counter/' + encodeURIComponent('/') + '.json');
+        r.send();
+
+        // 일일 방문자 (API v0 - 토큰 필요)
+        if (GC.token) {
+            var today = new Date().toISOString().split('T')[0];
+            var r2 = new XMLHttpRequest();
+            r2.addEventListener('load', function() {
+                try {
+                    var data = JSON.parse(this.responseText);
+                    var el = document.getElementById('gc-today');
+                    if (el) el.textContent = data.total_unique != null ? data.total_unique : (data.total || '-');
+                } catch(e) {}
+            });
+            r2.open('GET', base + '/api/v0/stats/total?start=' + today + '&end=' + today);
+            r2.setRequestHeader('Authorization', 'Bearer ' + GC.token);
+            r2.send();
+        }
+    })();
+    </script>
 </body>
 </html>
