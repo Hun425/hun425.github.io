@@ -35,10 +35,6 @@
             <div class="visitor-stats">
                 <h3>Visitors</h3>
                 <div class="stat-row">
-                    <span class="stat-label">Today</span>
-                    <span class="stat-value" id="gc-today">-</span>
-                </div>
-                <div class="stat-row">
                     <span class="stat-label">Total</span>
                     <span class="stat-value" id="gc-total">-</span>
                 </div>
@@ -199,33 +195,16 @@
 
         var base = 'https://' + GC.code + '.goatcounter.com';
 
-        // 총 방문자 (공개 API - 토큰 불필요)
+        // 총 순방문자 (공개 카운터 API)
         var r = new XMLHttpRequest();
         r.addEventListener('load', function() {
             try {
                 var data = JSON.parse(this.responseText);
-                var el = document.getElementById('gc-total');
-                if (el) el.textContent = data.count_unique || data.count || '-';
+                document.getElementById('gc-total').textContent = data.count_unique || data.count || 0;
             } catch(e) {}
         });
         r.open('GET', base + '/counter/' + encodeURIComponent('/') + '.json');
         r.send();
-
-        // 일일 방문자 (API v0 - 기본 7일 범위에서 마지막 날 = 오늘)
-        if (GC.token) {
-            var r2 = new XMLHttpRequest();
-            r2.addEventListener('load', function() {
-                try {
-                    var data = JSON.parse(this.responseText);
-                    var stats = data.stats || [];
-                    var last = stats[stats.length - 1];
-                    document.getElementById('gc-today').textContent = last ? last.daily : 0;
-                } catch(e) {}
-            });
-            r2.open('GET', base + '/api/v0/stats/total');
-            r2.setRequestHeader('Authorization', 'Bearer ' + GC.token);
-            r2.send();
-        }
     })();
     </script>
 </body>
