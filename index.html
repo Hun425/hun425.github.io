@@ -211,18 +211,18 @@
         r.open('GET', base + '/counter/' + encodeURIComponent('/') + '.json');
         r.send();
 
-        // 일일 방문자 (API v0 - 토큰 필요)
+        // 일일 방문자 (API v0 - 기본 7일 범위에서 마지막 날 = 오늘)
         if (GC.token) {
-            var today = new Date().toISOString().split('T')[0];
             var r2 = new XMLHttpRequest();
             r2.addEventListener('load', function() {
                 try {
                     var data = JSON.parse(this.responseText);
-                    var el = document.getElementById('gc-today');
-                    if (el) el.textContent = data.total_unique != null ? data.total_unique : (data.total || '-');
+                    var stats = data.stats || [];
+                    var last = stats[stats.length - 1];
+                    document.getElementById('gc-today').textContent = last ? last.daily : 0;
                 } catch(e) {}
             });
-            r2.open('GET', base + '/api/v0/stats/total?start=' + today + '&end=' + today);
+            r2.open('GET', base + '/api/v0/stats/total');
             r2.setRequestHeader('Authorization', 'Bearer ' + GC.token);
             r2.send();
         }
