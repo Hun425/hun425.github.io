@@ -1,211 +1,471 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" data-theme="dark">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>채기훈 | Backend Developer</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>채기훈 | Backend Developer</title>
+  <meta name="description" content="채기훈 백엔드 개발자 포트폴리오 - Kotlin, Java, Spring, gRPC">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
-    <div class="container">
-        <aside class="sidebar">
-            <div class="profile-section">
-                <div class="profile-icon">CH</div>
-                <h1 class="name">채기훈</h1>
-                <p class="role">Backend Developer</p>
-                <p class="intro-short">문제의 원인을 집요하게 파고들어,<br>기록으로 자산화하는 개발자</p>
-            </div>
-
-            <nav class="menu">
-                <a href="#about">About Me</a>
-                <a href="#skills">Skills</a>
-                <a href="#experience">Work Experience</a>
-                <a href="#projects">Project Gallery</a>
-            </nav>
-
-            <div class="contact-info">
-                <h3>Contact</h3>
-                <p>email@example.com</p>
-                <p><a href="https://github.com/Hun425" target="_blank">GitHub</a></p>
-                <p><a href="https://velog.io/@chae0738/posts" target="_blank">Blog</a></p>
-            </div>
-
-            <div class="visitor-stats">
-                <h3>Visitors</h3>
-                <div class="stat-row">
-                    <span class="stat-label">Total</span>
-                    <span class="stat-value" id="gc-total">-</span>
-                </div>
-            </div>
-        </aside>
-
-        <main class="content">
-
-            <section id="about" class="section">
-                <h2 class="section-title">About Me</h2>
-                <div class="callout">
-                    <p>
-                        새로운 기술과 환경에 빠르게 적응하여 실무에 기여하는 것을 중요하게 생각합니다.
-                    </p>
-                    <p>
-                        단순한 기능 구현을 넘어 대용량 트래픽 처리와 시스템 안정성을 고려한 아키텍처 설계를 지향합니다.
-                        실무 투입 직후 레거시 시스템의 배치 처리 시간을 60% 단축시키는 등, 주도적으로 문제를 해결하고 성과를 만들어내는 데 집중합니다.
-                    </p>
-                </div>
-            </section>
-
-            <section id="skills" class="section">
-                <h2 class="section-title">Skills</h2>
-                <div class="skill-grid">
-                    <div class="skill-category">
-                        <h3>Overall</h3>
-                        <p>Java, Kotlin, Python, Data Structures & Algorithms</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Backend</h3>
-                        <p>Spring Boot, Spring Data JPA, QueryDSL, Django, Spring Security</p>
-                    </div>
-                    <div class="skill-category">
-                        <h3>Database & Infra</h3>
-                        <p>PostgreSQL, MySQL, Redis, Elasticsearch, Kafka, Docker, AWS</p>
-                    </div>
-                </div>
-            </section>
-
-            <section id="experience" class="section">
-                <h2 class="section-title">Work Experience</h2>
-
-                <a href="pages/ictway.html" class="card-link">
-                    <div class="timeline-item clickable">
-                        <div class="timeline-header">
-                            <h3>ICTWAY</h3>
-                            <span class="period">2024.12 ~ Current</span>
-                        </div>
-                        <p class="role-text">SI 사업본부 백엔드 개발 / 대기정책 시스템 2차년도 구축</p>
-                        <p class="card-summary">Kafka + Spark 분산 처리, 배치 파이프라인 60% 단축</p>
-                        <span class="view-detail">자세히 보기 &rarr;</span>
-                    </div>
-                </a>
-
-                <a href="pages/flow.html" class="card-link">
-                    <div class="timeline-item clickable">
-                        <div class="timeline-header">
-                            <h3>Madras Check (Flow)</h3>
-                            <span class="period">2025.06 ~ Current</span>
-                        </div>
-                        <p class="role-text">엔터프라이즈 서비스 백엔드 개발</p>
-                        <p class="card-summary">레거시 시스템 최적화, 대규모 고객사 커스터마이징</p>
-                        <span class="view-detail">자세히 보기 &rarr;</span>
-                    </div>
-                </a>
-
-                <div class="timeline-item">
-                    <div class="timeline-header">
-                        <h3>SSAFY (삼성청년SW아카데미)</h3>
-                        <span class="period">2024.01 ~ 2024.12</span>
-                    </div>
-                    <p class="role-text">1600시간의 몰입형 SW 교육 및 실무 프로젝트 수행</p>
-                </div>
-            </section>
-
-            <section id="projects" class="section">
-                <h2 class="section-title">Project Gallery</h2>
-
-                <a href="pages/rep-engine.html" class="card-link">
-                    <article class="project-card clickable">
-                        <div class="project-header">
-                            <h3>REP-Engine</h3>
-                            <div class="tags">
-                                <span class="tag">Kotlin</span>
-                                <span class="tag">Kafka</span>
-                                <span class="tag">Elasticsearch</span>
-                                <span class="tag">Redis</span>
-                            </div>
-                        </div>
-                        <p class="project-subtitle">실시간 유저 행동 기반 개인화 추천 엔진</p>
-                        <p class="project-meta">개인 프로젝트</p>
-                        <p class="card-summary">이벤트 드리븐 아키텍처 기반 실시간 추천, 200ms 이내 응답</p>
-                        <span class="view-detail">자세히 보기 &rarr;</span>
-                    </article>
-                </a>
-
-                <a href="pages/cram.html" class="card-link">
-                    <article class="project-card clickable">
-                        <div class="project-header">
-                            <h3>Cram</h3>
-                            <div class="tags">
-                                <span class="tag">Spring Boot</span>
-                                <span class="tag">WebSocket</span>
-                                <span class="tag">Redis</span>
-                            </div>
-                        </div>
-                        <p class="project-subtitle">실시간 퀴즈 배틀 플랫폼</p>
-                        <p class="project-meta">팀 프로젝트 (팀장) | 2025.03 ~ Current</p>
-                        <p class="card-summary">WebSocket + STOMP 기반 실시간 경쟁 학습, 캐시 전략으로 70% 성능 개선</p>
-                        <span class="view-detail">자세히 보기 &rarr;</span>
-                    </article>
-                </a>
-
-                <a href="pages/algoreport.html" class="card-link">
-                    <article class="project-card clickable">
-                        <div class="project-header">
-                            <h3>AlgoReport</h3>
-                            <div class="tags">
-                                <span class="tag">Kotlin</span>
-                                <span class="tag">MSA</span>
-                                <span class="tag">ELK</span>
-                            </div>
-                        </div>
-                        <p class="project-subtitle">알고리즘 커리큘럼 추천 서비스</p>
-                        <p class="project-meta">개인 프로젝트 | 2025.04 ~ Current</p>
-                        <p class="card-summary">MSA 환경 Saga + Outbox 패턴으로 데이터 정합성 보장</p>
-                        <span class="view-detail">자세히 보기 &rarr;</span>
-                    </article>
-                </a>
-
-            </section>
-
-            <footer class="footer">
-                <p>&copy; 2026 Chae Kihun. Hosted on GitHub Pages.</p>
-            </footer>
-        </main>
+  <!-- ===== NAV ===== -->
+  <nav class="nav" id="nav">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo">CH.</a>
+      <ul class="nav__links">
+        <li><a href="#about" class="nav__link" data-section="about">About</a></li>
+        <li><a href="#skills" class="nav__link" data-section="skills">Skills</a></li>
+        <li><a href="#experience" class="nav__link" data-section="experience">Experience</a></li>
+        <li><a href="#projects" class="nav__link" data-section="projects">Projects</a></li>
+        <li><a href="#education" class="nav__link" data-section="education">Education</a></li>
+        <li><a href="#contact" class="nav__link" data-section="contact">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="btn-icon" id="theme-toggle" aria-label="Toggle theme">
+          <svg class="icon icon--sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+          <svg class="icon icon--moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+        <button class="btn-icon" id="print-btn" aria-label="Print resume" onclick="window.open('resume.html?print','_blank')">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+        </button>
+      </div>
     </div>
-    <!-- GoatCounter 추적 -->
-    <script data-goatcounter="https://hun425.goatcounter.com/count"
-            async src="//gc.zgo.at/count.js"></script>
+  </nav>
 
-    <!-- 방문자 카운터 표시 -->
-    <script>
-    (function() {
-        /*
-         * GoatCounter 설정 가이드:
-         * 1. https://goatcounter.com 가입 → 사이트 코드: hun425
-         * 2. Settings → "Allow adding visitor counts on your website" 활성화
-         * 3. (일일 방문자용) Settings → API tokens → 읽기 전용 토큰 생성 후 아래 token에 입력
-         *
-         * 본인 방문 제외:
-         *   https://hun425.github.io/#toggle-goatcounter 접속하면 토글됨
-         */
-        var GC = {
-            code: 'hun425',
-            token: '1sfm4otj5zeh1s1gra7oyvx3f1slsw00gl3cw3308dgmmvnjk2'
-        };
+  <!-- ===== MOBILE MENU TOGGLE ===== -->
+  <button class="nav__hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
 
-        var base = 'https://' + GC.code + '.goatcounter.com';
+  <main>
 
-        // 총 순방문자 (공개 카운터 API)
-        var r = new XMLHttpRequest();
-        r.addEventListener('load', function() {
-            try {
-                var data = JSON.parse(this.responseText);
-                document.getElementById('gc-total').textContent = data.count_unique || data.count || 0;
-            } catch(e) {}
-        });
-        r.open('GET', base + '/counter/' + encodeURIComponent('/') + '.json');
-        r.send();
-    })();
-    </script>
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+      <div class="hero__intro">
+        <div class="hero__text">
+          <p class="hero__greeting reveal">Backend Developer</p>
+          <h1 class="hero__name reveal">채기훈<span class="accent">.</span></h1>
+          <p class="hero__desc reveal">"읽기 쉬운 코드와 검증 가능한 구조를 통해<br>팀이 빠르게 이해하고 안전하게 수정할 수 있는<br>시스템을 만드는 2년차 백엔드 개발자입니다."</p>
+        <div class="hero__links reveal">
+          <a href="mailto:chae0738@naver.com" class="hero__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Email
+          </a>
+          <a href="https://github.com/Hun425" target="_blank" rel="noopener" class="hero__link">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+          </a>
+          <a href="https://velog.io/@chae0738/posts" target="_blank" rel="noopener" class="hero__link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+            Blog
+          </a>
+        </div>
+      </div>
+      <div class="hero__photo reveal">
+        <img src="images/profile.jpg" alt="채기훈 프로필 사진" class="hero__photo-img">
+      </div>
+      </div>
+      <div class="hero__kpi reveal">
+        <div class="kpi-card">
+          <span class="kpi-card__number" data-target="88">0</span><span class="kpi-card__unit">%</span>
+          <p class="kpi-card__label">테스트 실행 시간 단축</p>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-card__number" data-target="90">0</span><span class="kpi-card__unit">%</span>
+          <p class="kpi-card__label">검색 성능 개선</p>
+        </div>
+        <div class="kpi-card kpi-card--text">
+          <span class="kpi-card__icon">⬡</span>
+          <p class="kpi-card__label">헥사고날 아키텍처<br>포트/어댑터 설계</p>
+        </div>
+        <div class="kpi-card">
+          <span class="kpi-card__number" data-target="2">0</span><span class="kpi-card__unit">년</span>
+          <p class="kpi-card__label">개발 경력</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section" id="about">
+      <p class="section__label reveal">ABOUT</p>
+      <h2 class="section__title reveal">소개</h2>
+      <div class="section__divider reveal"></div>
+      <div class="about__cards">
+        <div class="about-card reveal">
+          <h3 class="about-card__tag">#단순하고 명확한 설계</h3>
+          <p class="about-card__text">오버엔지니어링을 지양하고 <strong class="accent">의도와 책임이 분명한 구조</strong>를 지향하며, 팀이 빠르게 이해하고 수정할 수 있는 설계를 중요하게 생각합니다.</p>
+        </div>
+        <div class="about-card reveal">
+          <h3 class="about-card__tag">#의도가 드러나는 코드</h3>
+          <p class="about-card__text">동작만 하는 코드보다 흐름과 의도가 자연스럽게 읽히는 코드를 중요하게 생각하며, <strong class="accent">가독성과 협업 효율</strong>을 함께 높이려 합니다.</p>
+        </div>
+        <div class="about-card reveal">
+          <h3 class="about-card__tag">#AI 활용 능력</h3>
+          <p class="about-card__text">AI Agent를 학습, 탐색, 구현, 정리 과정에 적극 활용해 <strong class="accent">반복 업무를 줄이고</strong>, 더 빠르게 검토·실행할 수 있는 개발 방식을 지향합니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section class="section" id="skills">
+      <p class="section__label reveal">SKILLS</p>
+      <h2 class="section__title reveal">기술 스택</h2>
+      <div class="section__divider reveal"></div>
+      <div class="skills__grid reveal">
+        <div class="skills__row">
+          <span class="skills__category">BACKEND</span>
+          <div class="skills__tags">
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kotlin/kotlin-original.svg" alt="" class="tag__icon">Kotlin</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/java/java-original.svg" alt="" class="tag__icon">Java</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/spring/spring-original.svg" alt="" class="tag__icon">Spring Boot</span>
+            <span class="tag tag--skill"><svg class="tag__icon" viewBox="0 0 24 24" width="16" height="16"><polygon points="12,2 22,8.5 22,15.5 12,22 2,15.5 2,8.5" fill="none" stroke="#ff0089" stroke-width="2"/><polygon points="12,6 18,9.5 18,14.5 12,18 6,14.5 6,9.5" fill="#ff0089" opacity="0.3"/></svg>Armeria</span>
+            <span class="tag tag--skill"><img src="https://grpc.io/img/logos/grpc-icon-color.png" alt="" class="tag__icon" onerror="this.outerHTML='<svg class=\'tag__icon\' viewBox=\'0 0 24 24\' width=\'16\' height=\'16\'><path d=\'M4 4h6v6H4zM14 4h6v6h-6zM4 14h6v6H4zM14 14h6v6h-6z\' fill=\'%2306b6d4\' opacity=\'0.8\'/><path d=\'M10 7h4M7 10v4M17 10v4M10 17h4\' stroke=\'%2306b6d4\' stroke-width=\'1.5\'/></svg>'">gRPC</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="" class="tag__icon">Redis</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/apachekafka/apachekafka-original.svg" alt="" class="tag__icon">Kafka</span>
+          </div>
+        </div>
+        <div class="skills__row">
+          <span class="skills__category">DATABASE</span>
+          <div class="skills__tags">
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="" class="tag__icon">PostgreSQL</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="" class="tag__icon">MySQL</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/elasticsearch/elasticsearch-original.svg" alt="" class="tag__icon">Elasticsearch</span>
+          </div>
+        </div>
+        <div class="skills__row">
+          <span class="skills__category">DEVOPS</span>
+          <div class="skills__tags">
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-plain-wordmark.svg" alt="" class="tag__icon">AWS</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="" class="tag__icon">Docker</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg" alt="" class="tag__icon">Linux</span>
+            <span class="tag tag--skill"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jenkins/jenkins-original.svg" alt="" class="tag__icon">Jenkins</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== EXPERIENCE ===== -->
+    <section class="section" id="experience">
+      <p class="section__label reveal">CAREER</p>
+      <h2 class="section__title reveal">경력</h2>
+      <div class="section__divider reveal"></div>
+      <div class="timeline">
+
+        <div class="timeline__item reveal">
+          <div class="timeline__dot"></div>
+          <div class="timeline__date">2026.03 - 재직중</div>
+          <div class="timeline__content">
+            <h3 class="timeline__company">비욘드메디슨 <span class="timeline__role">엔터프라이즈개발팀 · 팀원</span></h3>
+            <div class="timeline__project">
+              <h4>Clickless</h4>
+              <div class="timeline__tags">
+                <span class="tag tag--sm">Kotlin</span>
+                <span class="tag tag--sm">Spring Boot</span>
+                <span class="tag tag--sm">Armeria</span>
+                <span class="tag tag--sm">gRPC</span>
+                <span class="tag tag--sm">Docker</span>
+                <span class="tag tag--sm">MySQL</span>
+                <span class="tag tag--sm">Redis</span>
+              </div>
+              <ul class="timeline__list">
+                <li>헥사고날 아키텍처 기반 포트/어댑터 계층 분리 설계, 비즈니스 규칙과 인프라 의존성을 격리하여 유지보수성 확보</li>
+                <li>내부 서비스 간 계약 안정성과 인증·세션 컨텍스트 일관성을 위해 gRPC + Armeria 기반 API 개발</li>
+                <li>테스트 구조 최적화를 통해 전체 테스트 실행 시간 <strong>약 88% 단축</strong> (429초 → 50초)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__dot"></div>
+          <div class="timeline__date">2025.10 - 2026.03</div>
+          <div class="timeline__content">
+            <h3 class="timeline__company">마드라스체크 <span class="timeline__role">엔터프라이즈개발팀 · 팀원</span></h3>
+            <div class="timeline__project">
+              <h4>삼성화재 통계 고도화</h4>
+              <div class="timeline__tags">
+                <span class="tag tag--sm">Java</span>
+                <span class="tag tag--sm">Node.js</span>
+                <span class="tag tag--sm">PostgreSQL</span>
+                <span class="tag tag--sm">Redis</span>
+              </div>
+              <ul class="timeline__list">
+                <li>Java 백엔드 – Node.js – Redis – PostgreSQL 분리형 구조를 설계해 실시간 이벤트 수집과 배치 이관 분리</li>
+                <li>사용자 액션 기반 이벤트 발행, 배치 Worker, 실시간 마이그레이션, 실패 시 로컬 백업까지 고려한 집계 파이프라인 구현</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline__item reveal">
+          <div class="timeline__dot"></div>
+          <div class="timeline__date">2024.12 - 2025.10</div>
+          <div class="timeline__content">
+            <h3 class="timeline__company">아이씨티웨이 <span class="timeline__role">SI 2팀 · 사원</span></h3>
+            <div class="timeline__project">
+              <h4>대기정책 시스템 구축</h4>
+              <div class="timeline__tags">
+                <span class="tag tag--sm">Java</span>
+                <span class="tag tag--sm">Spring Boot</span>
+                <span class="tag tag--sm">Kafka</span>
+                <span class="tag tag--sm">Spark</span>
+                <span class="tag tag--sm">PostgreSQL</span>
+                <span class="tag tag--sm">MyBatis</span>
+              </div>
+              <ul class="timeline__list">
+                <li>Kafka와 Spark 기반 분산 처리 아키텍처를 설계하여 대용량 차량 데이터 처리 파이프라인 구축</li>
+                <li>비동기 인덱스 생성 전략 도입으로 데이터 적재 성능 <strong>60% 개선</strong> (1시간 40분 → 40분)</li>
+                <li>배치 처리 구조 개선으로 전체 처리 시간 8~10일 → 3~4일, <strong>약 60% 단축</strong></li>
+                <li>Apache POI 기반 데이터 파싱 및 적재 로직 설계로 안정적인 데이터 처리 환경 구축</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section class="section" id="projects">
+      <p class="section__label reveal">PROJECTS</p>
+      <h2 class="section__title reveal">주요 과제 & 성과</h2>
+      <div class="section__divider reveal"></div>
+
+      <div class="project-cards" id="project-cards">
+
+        <article class="project-card reveal">
+          <div class="project-card__header">
+            <h3>테스트 구조 최적화를 통한 CI 피드백 루프 개선</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--company">비욘드메디슨</span>
+              <span class="tag tag--category">성능 개선</span>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">배경</h4>
+              <p>Clickless 저장소의 통합 테스트가 @SpringBootTest + Testcontainers + @DirtiesContext 조합으로 인해 컨텍스트 재기동이 반복 발생. 전체 테스트 실행에 429초 소요.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">해결</h4>
+              <p>병목이 테스트 로직이 아닌 컨텍스트 재기동 비용임을 baseline 측정으로 확인. 테스트 의미를 보존하면서 @DirtiesContext 대신 Redis cleanup + DB snapshot restore로 전환하여 컨텍스트 캐시 재사용을 극대화하는 방향을 선택.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">결과</h4>
+              <div class="metric">
+                <span class="metric__label">전체 테스트</span>
+                <div class="metric__comparison">
+                  <span class="metric__before">429s</span>
+                  <span class="metric__arrow">→</span>
+                  <span class="metric__after">50s</span>
+                </div>
+                <span class="metric__badge">-88%</span>
+              </div>
+              <div class="metric">
+                <span class="metric__label">최대 병목</span>
+                <div class="metric__comparison">
+                  <span class="metric__before">207s</span>
+                  <span class="metric__arrow">→</span>
+                  <span class="metric__after">3s</span>
+                </div>
+                <span class="metric__badge">-98%</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-card__header">
+            <h3>Elasticsearch 도입을 통한 대용량 데이터 검색 성능 최적화</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--company">아이씨티웨이</span>
+              <span class="tag tag--category">성능 개선</span>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">배경</h4>
+              <p>약 2,260만 건의 차량 등록 데이터 검색 시 PostgreSQL LIKE 쿼리로 인한 Full Table Scan 발생. 마지막 페이지 조회 시 응답 시간 최대 20초까지 소요.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">해결</h4>
+              <p>GIN 인덱스 전문 검색도 검토했으나 OFFSET 구조적 한계 해결이 불가하다고 판단. 역색인 기반으로 검색 접근 방식 자체를 전환하기 위해 Elasticsearch를 선택하고, 데이터 정합성이 중요한 원본은 PostgreSQL에 유지하는 하이브리드 구조 설계.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">결과</h4>
+              <div class="metric">
+                <span class="metric__label">검색 응답</span>
+                <div class="metric__comparison">
+                  <span class="metric__before">20s</span>
+                  <span class="metric__arrow">→</span>
+                  <span class="metric__after">2s</span>
+                </div>
+                <span class="metric__badge">-90%</span>
+              </div>
+              <div class="metric">
+                <span class="metric__label">DB 부하</span>
+                <div class="metric__comparison">
+                  <span class="metric__after">70% 감소</span>
+                </div>
+                <span class="metric__badge">-70%</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-card__header">
+            <h3>Caffeine 캐시 적용을 통한 퀴즈 API 성능 최적화</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--personal">팀 프로젝트</span>
+              <span class="tag tag--category">성능 개선</span>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">배경</h4>
+              <p>퀴즈 목록/상세 조회 API의 반복적 DB 접근으로 인한 성능 저하. 특히 인기 퀴즈나 데일리 퀴즈의 경우 불필요한 DB 부하 발생.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">해결</h4>
+              <p>조회 빈도는 높지만 변경 빈도가 낮은 데이터 특성을 분석하여 분산 캐시 대신 로컬 캐시가 적합하다고 판단. Caffeine을 선택하고, 데이터 변경 시 @CacheEvict로 일관성을 보장하는 전략 적용. k6로 캐시 적용 전후 성능 검증.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">결과</h4>
+              <div class="metric">
+                <span class="metric__label">응답 속도</span>
+                <div class="metric__comparison">
+                  <span class="metric__after">70% 단축</span>
+                </div>
+                <span class="metric__badge">-70%</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal">
+          <div class="project-card__header">
+            <h3>Spring WebSocket을 활용한 실시간 퀴즈 배틀 기능 구현</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--personal">팀 프로젝트</span>
+              <span class="tag tag--category">실시간 설계</span>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">배경</h4>
+              <p>사용자 간 실시간 상호작용 학습 필요. 기존 HTTP 요청/응답 방식으로는 배틀 상태 동기화 불가. 폴링 방식은 트래픽 유발 및 실시간성 저하.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">해결</h4>
+              <p>폴링 방식의 불필요한 트래픽과 실시간성 한계를 해소하기 위해 양방향 통신이 가능한 WebSocket을 선택. STOMP 프로토콜로 구독/발행 패턴을 적용해 배틀방 단위 메시지 격리와 동시성 제어 구현.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">결과</h4>
+              <p>실시간 퀴즈 배틀 기능 구현 완료. 폴링 대비 서버/네트워크 부하 감소 및 실시간성 보장. WebSocket 기반 메시징 아키텍처 구축 경험 확보.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card reveal" id="extra-project" style="display:none;">
+          <div class="project-card__header">
+            <h3>Saga 및 Outbox 패턴 기반의 분산 트랜잭션 구현</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--personal">개인 프로젝트</span>
+              <span class="tag tag--category">아키텍처 설계</span>
+            </div>
+          </div>
+          <div class="project-card__body">
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">배경</h4>
+              <p>여러 모듈에 걸친 비즈니스 로직에서 단일 ACID 트랜잭션으로 데이터 정합성 보장 불가. 처리 중 장애 발생 시 데이터 불일치 문제.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">해결</h4>
+              <p>모듈 간 강결합 없이 데이터 정합성을 보장하기 위해 2PC 대신 Saga(Orchestration)를 선택. 로컬 커밋과 이벤트 발행의 원자성 문제를 해결하기 위해 Outbox 패턴 + Debezium 조합으로 At-Least-Once 보장 설계.</p>
+            </div>
+            <div class="project-card__col">
+              <h4 class="project-card__subtitle">결과</h4>
+              <p>장애 전파 방지로 시스템 안정성·회복탄력성 향상. 모듈 간 결합도 감소, 유지보수성 및 확장성 확보.</p>
+            </div>
+          </div>
+        </article>
+
+      </div>
+      <button class="btn-more" id="toggle-projects">더 보기</button>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section class="section" id="education">
+      <p class="section__label reveal">EDUCATION & CERTIFICATIONS</p>
+      <h2 class="section__title reveal">교육 & 자격</h2>
+      <div class="section__divider reveal"></div>
+      <div class="edu__grid">
+        <div class="edu__col reveal">
+          <h3 class="edu__heading">교육</h3>
+          <div class="edu__item">
+            <span class="edu__date">2024.01 - 2024.12</span>
+            <p class="edu__name">삼성 청년 SW 아카데미 (SSAFY) 11기</p>
+            <p class="edu__detail">웹 기술 트랙 수료</p>
+          </div>
+          <div class="edu__item">
+            <span class="edu__date">2017.03 - 2023.08</span>
+            <p class="edu__name">경상국립대학교</p>
+            <p class="edu__detail">도시공학과 전공 / 스마트도시건설 복수전공</p>
+          </div>
+        </div>
+        <div class="edu__col reveal">
+          <h3 class="edu__heading">자격증 & 수상</h3>
+          <div class="edu__item">
+            <span class="edu__date">한국산업인력공단</span>
+            <p class="edu__name">정보처리기사</p>
+          </div>
+          <div class="edu__item">
+            <span class="edu__date">삼성전자 2024.06</span>
+            <p class="edu__name">삼성 역량 평가 PRO (B형)</p>
+          </div>
+          <div class="edu__item">
+            <span class="edu__date">삼성전자 2024.08</span>
+            <p class="edu__name">공통 프로젝트 우수상</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section class="section section--contact" id="contact">
+      <p class="section__label reveal">CONTACT</p>
+      <h2 class="section__title reveal">연락처</h2>
+      <div class="section__divider reveal"></div>
+      <div class="contact__grid reveal">
+        <a href="mailto:chae0738@naver.com" class="contact__card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <span>chae0738@naver.com</span>
+        </a>
+        <a href="tel:010-6278-8593" class="contact__card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span>010-6278-8593</span>
+        </a>
+        <a href="https://github.com/Hun425" target="_blank" rel="noopener" class="contact__card">
+          <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>github.com/Hun425</span>
+        </a>
+        <a href="https://velog.io/@chae0738/posts" target="_blank" rel="noopener" class="contact__card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          <span>velog.io/@chae0738</span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <p>&copy; 2025 채기훈. All rights reserved.</p>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,300 @@
+/* ===== RESUME PRINT STYLESHEET ===== */
+/* A4 최적화 인쇄 전용 */
+
+@page {
+  size: A4;
+  margin: 16mm 18mm;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  font-size: 9.5pt;
+  line-height: 1.55;
+  color: #1a1a1a;
+  background: #fff;
+}
+
+/* ── HEADER ── */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  padding-bottom: 14px;
+}
+
+.header__left { flex: 1; }
+
+.header__name {
+  font-size: 28pt;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 2px;
+}
+
+.header__role {
+  font-size: 11pt;
+  font-weight: 600;
+  color: #0891b2;
+  margin-bottom: 8px;
+}
+
+.header__desc {
+  font-size: 9pt;
+  color: #555;
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+.header__right {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.header__photo {
+  width: 90px;
+  height: 118px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+
+.header__contact {
+  font-size: 8.5pt;
+  color: #444;
+  line-height: 1.8;
+  text-align: right;
+}
+
+/* ── ABOUT KEYWORDS ── */
+.about-keywords {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 10px 0;
+}
+
+.about-keyword {
+  font-size: 8.5pt;
+  color: #555;
+  line-height: 1.5;
+}
+
+.about-keyword strong {
+  color: #0891b2;
+  font-weight: 700;
+  font-size: 9pt;
+}
+
+/* ── DIVIDER ── */
+.divider {
+  border: none;
+  border-top: 1.5px solid #e5e5e5;
+  margin: 10px 0;
+}
+
+/* ── SECTION ── */
+.section { margin-bottom: 4px; }
+
+.section__title {
+  font-size: 12pt;
+  font-weight: 700;
+  color: #0891b2;
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+
+/* ── SKILLS TABLE ── */
+.skills-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skills-table tr { border-bottom: 1px solid #f0f0f0; }
+.skills-table tr:last-child { border-bottom: none; }
+
+.skills-label {
+  font-size: 8.5pt;
+  font-weight: 700;
+  color: #0891b2;
+  width: 70px;
+  padding: 5px 0;
+  vertical-align: top;
+}
+
+.skills-table td:last-child {
+  font-size: 9pt;
+  color: #333;
+  padding: 5px 0 5px 12px;
+}
+
+/* ── EXPERIENCE ── */
+.exp {
+  margin-bottom: 14px;
+  page-break-inside: avoid;
+}
+
+.exp__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 4px;
+}
+
+.exp__company {
+  font-size: 11pt;
+  font-weight: 700;
+  display: inline;
+}
+
+.exp__role {
+  font-size: 8.5pt;
+  color: #777;
+  margin-left: 8px;
+}
+
+.exp__date {
+  font-size: 8.5pt;
+  color: #999;
+  white-space: nowrap;
+}
+
+.exp__project {
+  margin-bottom: 4px;
+}
+
+.exp__project h4 {
+  font-size: 9.5pt;
+  font-weight: 600;
+  color: #333;
+  display: inline;
+}
+
+.exp__tech {
+  font-size: 8pt;
+  color: #888;
+  margin-left: 8px;
+}
+
+ul {
+  padding-left: 16px;
+  margin: 0;
+}
+
+li {
+  font-size: 9pt;
+  color: #333;
+  margin-bottom: 2px;
+  line-height: 1.55;
+}
+
+li::marker { color: #0891b2; }
+
+strong { color: #0891b2; font-weight: 700; }
+
+/* ── PROJECTS (주요 과제) ── */
+.project {
+  margin-bottom: 14px;
+  page-break-inside: avoid;
+}
+
+.project__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.project__header h3 {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.project__badge {
+  font-size: 7.5pt;
+  color: #0891b2;
+  white-space: nowrap;
+}
+
+.project__body {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr 0.8fr;
+  gap: 12px;
+}
+
+.project__col h4 {
+  font-size: 8pt;
+  font-weight: 700;
+  color: #0891b2;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+}
+
+.project__col p {
+  font-size: 8.5pt;
+  color: #444;
+  line-height: 1.5;
+}
+
+/* ── EDUCATION ── */
+.edu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.edu-heading {
+  font-size: 9.5pt;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 6px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #eee;
+}
+
+.edu-item {
+  margin-bottom: 5px;
+}
+
+.edu-date {
+  font-size: 8pt;
+  color: #999;
+}
+
+.edu-name {
+  font-size: 9pt;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ── PRINT OVERRIDES ── */
+@media print {
+  body { background: #fff; }
+  .header__photo { border: 1px solid #ccc; }
+}
+
+/* ── SCREEN PREVIEW ── */
+@media screen {
+  body {
+    max-width: 210mm;
+    margin: 20px auto;
+    padding: 16mm 18mm;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e5e5e5;
+  }
+}
