@@ -1,0 +1,333 @@
+/* ===== PORTFOLIO PDF STYLESHEET ===== */
+/* Paged.js + Puppeteer — 1 project = 1 page, 아키텍처 이미지 크게 */
+
+@page {
+  size: A4;
+  margin: 14mm 16mm 16mm 16mm;
+
+  @bottom-center {
+    content: counter(page) " / " counter(pages);
+    font-size: 7.5pt;
+    color: #999;
+    font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+  }
+
+  @top-right {
+    content: "채기훈 · Backend Developer";
+    font-size: 7pt;
+    color: #bbb;
+    font-family: 'Pretendard Variable', 'Pretendard', sans-serif;
+  }
+}
+
+@page :first {
+  @top-right { content: none; }
+  @bottom-center { content: none; }
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+
+body {
+  font-family: 'Pretendard Variable', 'Pretendard', -apple-system, sans-serif;
+  font-size: 9pt;
+  line-height: 1.4;
+  color: #1a1a1a;
+  background: #fff;
+}
+
+/* ── COVER PAGE ── */
+.cover {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  text-align: center;
+}
+
+.cover__name {
+  font-size: 36pt;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-bottom: 4px;
+}
+
+.cover__role {
+  font-size: 14pt;
+  font-weight: 600;
+  color: #0891b2;
+  margin-bottom: 24px;
+}
+
+.cover__desc {
+  font-size: 11pt;
+  color: #555;
+  line-height: 1.6;
+  max-width: 420px;
+  margin-bottom: 40px;
+}
+
+.cover__contact {
+  font-size: 9.5pt;
+  color: #666;
+  line-height: 2;
+}
+
+.cover__divider {
+  width: 60px;
+  height: 3px;
+  background: #0891b2;
+  border: none;
+  margin: 32px auto;
+}
+
+.cover__date {
+  font-size: 9pt;
+  color: #999;
+  margin-top: 40px;
+}
+
+/* ── TOC (목차) ── */
+.toc {
+  break-before: page;
+  padding-top: 40px;
+}
+
+.toc__title {
+  font-size: 16pt;
+  font-weight: 700;
+  color: #0891b2;
+  margin-bottom: 24px;
+}
+
+.toc__list {
+  list-style: none;
+  padding: 0;
+}
+
+.toc__item {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 8px 0;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 10.5pt;
+}
+
+.toc__item-title {
+  font-weight: 600;
+  color: #1a1a1a;
+}
+
+.toc__item-meta {
+  font-size: 8.5pt;
+  color: #999;
+  white-space: nowrap;
+  margin-left: 12px;
+}
+
+/* ── PROJECT PAGE ── */
+.project-page {
+  break-before: page;
+  break-after: page;
+}
+
+.project-page__title {
+  font-size: 13pt;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 2px;
+  line-height: 1.2;
+}
+
+.project-page__meta {
+  font-size: 8pt;
+  color: #777;
+  margin-bottom: 5px;
+}
+
+.project-page__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+}
+
+.tag {
+  font-size: 7pt;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  color: #555;
+  white-space: nowrap;
+}
+
+.tag--category {
+  background: #0891b2;
+  color: #fff;
+  border-color: #0891b2;
+}
+
+/* ── SECTION ── */
+.port__section {
+  margin-bottom: 6px;
+}
+
+.port__section h3 {
+  font-size: 9.5pt;
+  font-weight: 700;
+  color: #0891b2;
+  margin-bottom: 3px;
+  padding-bottom: 2px;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.port__section p {
+  font-size: 8.5pt;
+  color: #333;
+  line-height: 1.4;
+  margin-bottom: 2px;
+}
+
+/* ── ARCHITECTURE IMAGE — 크게! ── */
+.port__arch-img {
+  display: block;
+  max-width: 95%;
+  max-height: 300px;
+  margin: 8px auto 10px;
+  object-fit: contain;
+}
+
+/* ── 2-COLUMN: 기술선택이유 + 트러블슈팅 ── */
+.port__two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+.port__two-col .port__section {
+  margin-bottom: 0;
+}
+
+.port__two-col .port__section h3 {
+  font-size: 9pt;
+}
+
+.port__two-col .port__section p {
+  font-size: 8.5pt;
+  line-height: 1.4;
+}
+
+/* ── TROUBLESHOOTING ── */
+.trouble-item {
+  break-inside: avoid;
+  margin-bottom: 5px;
+  padding-left: 8px;
+  border-left: 2px solid #0891b2;
+}
+
+.trouble-item h4 {
+  font-size: 8pt;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 1px;
+}
+
+.trouble-item p {
+  font-size: 7.5pt;
+  color: #444;
+  line-height: 1.35;
+  margin-bottom: 1px;
+}
+
+/* ── METRICS ── */
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.metric-card {
+  break-inside: avoid;
+  border: 1px solid #e5e5e5;
+  border-radius: 6px;
+  padding: 10px 8px;
+  text-align: center;
+}
+
+.metric-card__label {
+  font-size: 7pt;
+  color: #777;
+  margin-bottom: 2px;
+}
+
+.metric-card__before {
+  font-size: 8pt;
+  color: #999;
+  text-decoration: line-through;
+}
+
+.metric-card__arrow {
+  font-size: 8pt;
+  color: #999;
+  margin: 0 2px;
+}
+
+.metric-card__after {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #0891b2;
+}
+
+.metric-card__badge {
+  display: inline-block;
+  font-size: 7pt;
+  font-weight: 700;
+  color: #fff;
+  background: #0891b2;
+  padding: 1px 6px;
+  border-radius: 8px;
+  margin-top: 2px;
+}
+
+/* ── CODE ── */
+code {
+  font-family: 'Consolas', 'Fira Code', monospace;
+  font-size: 8pt;
+  background: #f5f5f5;
+  padding: 1px 3px;
+  border-radius: 3px;
+}
+
+strong {
+  color: #0891b2;
+  font-weight: 700;
+}
+
+/* ── INLINE STYLE OVERRIDE ── */
+.port__section p[style] {
+  font-size: 8pt !important;
+  line-height: 1.35 !important;
+}
+
+/* ── SCREEN PREVIEW ── */
+@media screen {
+  body {
+    max-width: 210mm;
+    margin: 20px auto;
+    padding: 14mm 16mm;
+    background: #fff;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    border: 1px solid #e5e5e5;
+  }
+}

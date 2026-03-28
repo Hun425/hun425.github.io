@@ -171,6 +171,30 @@ strong { font-weight: 600; color: var(--accent); }
 
 .icon { width: 20px; height: 20px; }
 
+/* ── Download Buttons ── */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background var(--transition), transform var(--transition);
+  white-space: nowrap;
+}
+.btn-download:hover {
+  background: #0e7490;
+  transform: translateY(-1px);
+}
+.btn-download .icon {
+  width: 14px;
+  height: 14px;
+}
+
 [data-theme="dark"] .icon--sun { display: block; }
 [data-theme="dark"] .icon--moon { display: none; }
 [data-theme="light"] .icon--sun { display: none; }
@@ -676,6 +700,32 @@ main {
   line-height: 1.7;
 }
 
+.project-card__summary {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.project-card__metrics {
+  margin-bottom: 12px;
+}
+
+.project-card__detail-hint {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: right;
+  margin-top: 8px;
+  opacity: 0.6;
+  transition: opacity var(--transition), color var(--transition);
+}
+
+.project-card:hover .project-card__detail-hint {
+  opacity: 1;
+  color: var(--accent);
+}
+
 /* ---------- METRIC STAT ---------- */
 .metric {
   display: flex;
@@ -948,6 +998,202 @@ main {
   .kpi-card__number { font-size: 2rem; }
 }
 
+/* ---------- PROJECT MODAL ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal {
+  position: relative;
+  width: min(90vw, 780px);
+  max-height: 85vh;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  overflow-y: auto;
+  padding: 48px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.4);
+  transform: translateY(20px) scale(0.97);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.active .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal__close {
+  position: sticky;
+  top: 0;
+  float: right;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  padding: 0 0 8px 8px;
+  transition: color var(--transition);
+  z-index: 1;
+}
+
+.modal__close:hover {
+  color: var(--accent);
+}
+
+.modal__title {
+  font-size: 1.4rem;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 8px;
+}
+
+.modal__meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+.modal__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 32px;
+}
+
+.modal__section {
+  margin-bottom: 32px;
+}
+
+.modal__section h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 12px;
+  letter-spacing: 0.02em;
+}
+
+.modal__section p {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 8px;
+}
+
+.modal__section code {
+  background: var(--bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.82rem;
+  font-family: 'Pretendard Variable', monospace;
+}
+
+.modal__trouble {
+  background: var(--bg-secondary);
+  border-left: 3px solid var(--accent);
+  padding: 16px 20px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  margin-bottom: 16px;
+}
+
+.modal__trouble h4 {
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.modal__trouble p {
+  font-size: 0.85rem;
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+
+.modal__trouble p:last-child {
+  margin-bottom: 0;
+}
+
+.modal__metrics {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal__arch-img {
+  width: 100%;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--card-border);
+  margin: 16px 0;
+  cursor: zoom-in;
+  transition: opacity var(--transition);
+}
+
+.modal__arch-img:hover {
+  opacity: 0.85;
+}
+
+/* ---------- IMAGE LIGHTBOX ---------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s, visibility 0.25s;
+  cursor: zoom-out;
+}
+
+.lightbox.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lightbox img {
+  max-width: 92vw;
+  max-height: 90vh;
+  border-radius: var(--radius);
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+  transform: scale(0.95);
+  transition: transform 0.25s ease;
+}
+
+.lightbox.active img {
+  transform: scale(1);
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .modal {
+    width: 95vw;
+    max-height: 90vh;
+    padding: 24px;
+  }
+  .modal__title {
+    font-size: 1.15rem;
+  }
+}
+
 /* ---------- PRINT ---------- */
 @media print {
   /* ── 기본 리셋 ── */
@@ -965,6 +1211,7 @@ main {
   .nav,
   .nav__hamburger,
   .btn-icon,
+  .btn-download,
   .btn-more,
   .footer,
   .hero__links {

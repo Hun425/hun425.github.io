@@ -1,0 +1,64 @@
+name: Generate PDF
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'resume.html'
+      - 'portfolio.html'
+      - 'css/resume.css'
+      - 'css/portfolio.css'
+      - 'images/**'
+      - 'scripts/generate-pdf.js'
+
+  workflow_dispatch:
+
+jobs:
+  build-pdf:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Pretendard font
+        run: |
+          mkdir -p ~/.fonts
+          wget -q "https://github.com/orioncactus/pretendard/releases/download/v1.3.9/Pretendard-1.3.9.zip" -O /tmp/pretendard.zip
+          unzip -q /tmp/pretendard.zip -d /tmp/pretendard
+          find /tmp/pretendard -name "*.otf" -o -name "*.ttf" | xargs -I{} cp {} ~/.fonts/ 2>/dev/null || true
+          fc-cache -f -v
+
+      - name: Generate PDFs
+        run: npm run generate-pdf
+
+      - name: Verify PDF output
+        run: |
+          echo "=== Resume PDF ==="
+          ls -lh pdf/resume.pdf
+          echo ""
+          echo "=== Portfolio PDF ==="
+          ls -lh pdf/portfolio.pdf
+          RESUME_SIZE=$(stat -c%s pdf/resume.pdf)
+          PORTFOLIO_SIZE=$(stat -c%s pdf/portfolio.pdf)
+          [ "$RESUME_SIZE" -lt 2097152 ] || (echo "ERROR: resume.pdf too large (>2MB)" && exit 1)
+          [ "$PORTFOLIO_SIZE" -lt 10485760 ] || (echo "ERROR: portfolio.pdf too large (>10MB)" && exit 1)
+          echo "PDF size validation passed"
+
+      - name: Commit and push PDFs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add pdf/resume.pdf pdf/portfolio.pdf
+          git diff --cached --quiet && echo "No changes to PDFs" && exit 0
+          git commit -m "chore: regenerate PDF files [skip ci]"
+          git push

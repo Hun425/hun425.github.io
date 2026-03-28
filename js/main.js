@@ -121,4 +121,87 @@
     }
   });
 
+  /* ---------- Project Modal ---------- */
+  const modalOverlay = document.getElementById('project-modal');
+  const modalContent = document.getElementById('modal-content');
+  const modalClose = modalOverlay ? modalOverlay.querySelector('.modal__close') : null;
+
+  function openModal(projectId) {
+    const tpl = document.getElementById('tpl-' + projectId);
+    if (!tpl || !modalOverlay) return;
+    modalContent.innerHTML = '';
+    modalContent.appendChild(tpl.content.cloneNode(true));
+    modalOverlay.classList.add('active');
+    document.body.classList.add('modal-open');
+    history.replaceState(null, '', '#' + projectId);
+  }
+
+  function closeModal() {
+    if (!modalOverlay) return;
+    modalOverlay.classList.remove('active');
+    document.body.classList.remove('modal-open');
+    history.replaceState(null, '', window.location.pathname);
+  }
+
+  // Card click → open modal
+  document.querySelectorAll('.project-card[data-project]').forEach(function (card) {
+    card.addEventListener('click', function () {
+      openModal(card.dataset.project);
+    });
+  });
+
+  // Close handlers
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function (e) {
+      if (e.target === modalOverlay) closeModal();
+    });
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+      if (lightbox && lightbox.classList.contains('active')) {
+        closeLightbox();
+      } else {
+        closeModal();
+      }
+    }
+  });
+
+  /* ---------- Image Lightbox ---------- */
+  var lightbox = document.getElementById('lightbox');
+  var lightboxImg = document.getElementById('lightbox-img');
+
+  function openLightbox(src) {
+    if (!lightbox) return;
+    lightboxImg.src = src;
+    lightbox.classList.add('active');
+  }
+
+  function closeLightbox() {
+    if (!lightbox) return;
+    lightbox.classList.remove('active');
+  }
+
+  if (lightbox) {
+    lightbox.addEventListener('click', closeLightbox);
+  }
+
+  // Delegate click on arch images inside modal
+  if (modalContent) {
+    modalContent.addEventListener('click', function (e) {
+      if (e.target.classList.contains('modal__arch-img')) {
+        e.stopPropagation();
+        openLightbox(e.target.src);
+      }
+    });
+  }
+
+  // Open from URL hash on load
+  if (window.location.hash) {
+    var id = window.location.hash.slice(1);
+    if (document.getElementById('tpl-' + id)) {
+      setTimeout(function () { openModal(id); }, 500);
+    }
+  }
+
 })();

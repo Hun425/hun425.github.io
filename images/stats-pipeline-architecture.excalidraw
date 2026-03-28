@@ -1,0 +1,71 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://excalidraw.com",
+  "elements": [
+
+    {"type":"rectangle","id":"zone-java","x":20,"y":20,"width":280,"height":480,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"opacity":100,"roundness":{"type":3},"strokeStyle":"solid"},
+    {"type":"text","id":"zone-java-lbl","x":100,"y":30,"width":120,"height":25,"text":"Java (Tomcat)","fontSize":18,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"rectangle","id":"zone-node","x":380,"y":20,"width":240,"height":480,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"opacity":100,"roundness":{"type":3},"strokeStyle":"solid"},
+    {"type":"text","id":"zone-node-lbl","x":410,"y":30,"width":180,"height":25,"text":"Node.js (flow-stats)","fontSize":18,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"rectangle","id":"box-action","x":60,"y":75,"width":200,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-action","x":80,"y":82,"width":160,"height":40,"text":"사용자 액션\n(글/댓글/채팅/파일)","fontSize":14,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-action-pub","x":160,"y":130,"width":0,"height":60,"points":[[0,0],[0,60]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null},
+
+    {"type":"rectangle","id":"box-publisher","x":40,"y":190,"width":240,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-publisher","x":62,"y":203,"width":196,"height":25,"text":"StatsEventPublisher","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-pub-event","x":280,"y":217,"width":120,"height":0,"points":[[0,0],[120,0]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null},
+    {"type":"text","id":"lbl-http","x":300,"y":195,"width":80,"height":18,"text":"HTTP POST","fontSize":13,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"rectangle","id":"box-event","x":400,"y":190,"width":200,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-event","x":435,"y":203,"width":130,"height":25,"text":"EventService","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-event-redis","x":600,"y":217,"width":120,"height":0,"points":[[0,0],[120,0]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null},
+    {"type":"text","id":"lbl-hincrby","x":612,"y":190,"width":96,"height":22,"text":"HINCRBY / ZADD","fontSize":12,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"rectangle","id":"box-redis","x":720,"y":190,"width":160,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-redis","x":770,"y":203,"width":60,"height":25,"text":"Redis","fontSize":20,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"text","id":"lbl-lock","x":730,"y":260,"width":140,"height":22,"text":"분산 락 (SET NX EX)","fontSize":12,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-pub-backup","x":160,"y":245,"width":0,"height":65,"points":[[0,0],[0,65]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null,"strokeStyle":"dashed"},
+    {"type":"text","id":"lbl-fail","x":170,"y":268,"width":50,"height":18,"text":"실패 시","fontSize":12,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"left"},
+
+    {"type":"rectangle","id":"box-backup","x":40,"y":310,"width":240,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-backup","x":55,"y":318,"width":210,"height":40,"text":"파일 백업 (장애 복구)\n/mount/stats-backup/","fontSize":13,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"rectangle","id":"box-batch","x":400,"y":310,"width":200,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-batch","x":425,"y":318,"width":150,"height":40,"text":"BatchWorker\n(매일 00:30)","fontSize":14,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-event-batch","x":500,"y":245,"width":0,"height":65,"points":[[0,0],[0,65]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null},
+
+    {"type":"arrow","id":"arr-batch-pg","x":600,"y":337,"width":120,"height":0,"points":[[0,0],[120,0]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null},
+    {"type":"text","id":"lbl-upsert","x":622,"y":315,"width":76,"height":18,"text":"UPSERT","fontSize":13,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"rectangle","id":"box-pg","x":720,"y":310,"width":160,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-pg","x":745,"y":323,"width":110,"height":25,"text":"PostgreSQL","fontSize":18,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-redis-pg","x":800,"y":245,"width":0,"height":65,"points":[[0,0],[0,65]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null,"strokeStyle":"dashed"},
+    {"type":"text","id":"lbl-sync","x":810,"y":268,"width":70,"height":18,"text":"Data Sync","fontSize":12,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"left"},
+
+    {"type":"rectangle","id":"box-migrate","x":400,"y":420,"width":200,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-migrate","x":415,"y":428,"width":170,"height":40,"text":"실시간 마이그레이션\n(탭 클릭 시 즉시 이관)","fontSize":13,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-batch-migrate","x":500,"y":365,"width":0,"height":55,"points":[[0,0],[0,55]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":"arrow","startArrowhead":null},
+
+    {"type":"rectangle","id":"box-admin","x":60,"y":420,"width":200,"height":55,"strokeColor":"#1e1e1e","backgroundColor":"transparent","fillStyle":"solid","strokeWidth":2,"roughness":1,"roundness":{"type":3}},
+    {"type":"text","id":"txt-admin","x":110,"y":435,"width":100,"height":25,"text":"관리자 조회","fontSize":16,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"},
+
+    {"type":"arrow","id":"arr-admin-pg-h","x":260,"y":447,"width":460,"height":0,"points":[[0,0],[460,0]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":null,"startArrowhead":null,"strokeStyle":"dashed"},
+    {"type":"arrow","id":"arr-admin-pg-v","x":720,"y":365,"width":0,"height":82,"points":[[0,0],[0,82]],"strokeColor":"#1e1e1e","strokeWidth":2,"roughness":1,"endArrowhead":null,"startArrowhead":"arrow","strokeStyle":"dashed"},
+    {"type":"text","id":"lbl-sql","x":440,"y":425,"width":70,"height":18,"text":"SQL 조회","fontSize":13,"fontFamily":1,"strokeColor":"#1e1e1e","textAlign":"center"}
+  ],
+  "appState": {
+    "viewBackgroundColor": "#ffffff",
+    "gridSize": null
+  }
+}
