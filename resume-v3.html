@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <title>채기훈 | 이력서</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="css/resume.css">
+  <script src="https://unpkg.com/pagedjs/dist/paged.polyfill.js"></script>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="header">
+    <div class="header__left">
+      <h1 class="header__name">채기훈</h1>
+      <p class="header__role">Backend Developer</p>
+      <p class="header__desc">문제의 근본 원인을 끝까지 파고드는 2년차 서버 개발자입니다. 업무에서 만난 gRPC 문제를 프레임워크 내부까지 따라가 <a href="https://armeria.dev/">LINE Armeria</a>에 기여하고 있습니다.</p>
+    </div>
+    <div class="header__right">
+      <img src="images/profile.jpg" alt="채기훈" class="header__photo">
+      <div class="header__contact">
+        <p><a href="mailto:chae0738@naver.com">chae0738@naver.com</a></p>
+        <p><a href="tel:+821062788593">010-6278-8593</a></p>
+        <p><a href="https://github.com/Hun425">github.com/Hun425</a></p>
+        <p><a href="https://hun425.github.io">hun425.github.io</a></p>
+        <p><a href="https://velog.io/@chae0738">velog.io/@chae0738</a></p>
+      </div>
+    </div>
+  </header>
+
+  <hr class="divider">
+
+  <!-- ===== SKILLS ===== -->
+  <section class="section">
+    <h2 class="section__title">기술 스택</h2>
+    <table class="skills-table">
+      <tr><td class="skills-label">Backend</td><td>Kotlin (Coroutines) · Java · Spring Boot · Armeria · gRPC · R2DBC · jOOQ · MyBatis</td></tr>
+      <tr><td class="skills-label">Data</td><td>MySQL · PostgreSQL · Redis</td></tr>
+      <tr><td class="skills-label">Infra</td><td>AWS (ECS · ALB · WAF · SQS) · Terraform · GitHub Actions · Docker</td></tr>
+    </table>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ===== OPEN SOURCE ===== -->
+  <section class="section">
+    <h2 class="section__title">오픈소스 기여</h2>
+
+    <div class="exp">
+      <div class="exp__header">
+        <div>
+          <h3 class="exp__company"><a href="https://github.com/line/armeria">LINE Armeria</a></h3>
+          <span class="exp__role">Netty 기반 JVM 마이크로서비스 프레임워크 · gRPC 모듈</span>
+        </div>
+        <span class="exp__date">2026.04 - 현재</span>
+      </div>
+      <ul>
+        <li>
+          <span class="item-title"><a href="https://github.com/line/armeria/pull/6947">#6947</a> 머지 (<a href="https://armeria.dev/release-notes/1.42.0/">1.42.0</a>) — blocking executor 사용 시 gRPC 직렬화·역직렬화의 실행 스레드 수정</span>
+          blocking executor를 켜도 요청 역직렬화와 응답 직렬화가 이벤트 루프에서 실행되던 결함(<a href="https://github.com/line/armeria/issues/6241">#6241</a>, 메인테이너 등록)을 수정
+        </li>
+        <li>
+          <span class="item-title"><a href="https://github.com/line/armeria/pull/6717">#6717</a> 머지 (<a href="https://armeria.dev/release-notes/1.40.0/">1.40.0</a> 신규 기능) — 비동기 gRPC 예외 핸들러</span>
+          에러 메시지 다국어 조회에 runBlocking을 쓰던 사내 코드에서 출발해, 동기 전용이던 예외 핸들러의 비동기 지원(applyAsync)을 제안하고 구현
+        </li>
+        <li>
+          <span class="item-title"><a href="https://github.com/line/armeria/issues/6938">#6938</a> 이슈 · <a href="https://github.com/line/armeria/pull/6931">#6931</a> 진행 중 — onReady() 재진입 결함</span>
+          dev에서 gRPC 호출이 504로 끊기던 문제의 발생 시점을 ALB 로그의 응답 크기 추이로 찾음. 요청 1건에 응답 메시지가 237개 오는 최소 재현으로 non-blocking 경로의 onReady() 재진입을 원인으로 특정. 순정 Armeria로 재현해 이슈와 수정 PR을 올림
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ===== EXPERIENCE ===== -->
+  <section class="section">
+    <h2 class="section__title">경력</h2>
+
+    <div class="exp exp--split">
+      <div class="exp__header">
+        <div>
+          <h3 class="exp__company">비욘드메디슨</h3>
+          <span class="exp__role">백엔드개발팀 · 팀원</span>
+        </div>
+        <span class="exp__date">2026.03 - 재직중</span>
+      </div>
+      <div class="exp__project">
+        <h4>Clickless — 디지털 치료기기 서비스</h4>
+        <span class="exp__tech">Kotlin · Armeria gRPC · R2DBC · MySQL · Redis · AWS ECS · Terraform</span>
+      </div>
+      <p class="exp__context">환자 앱 · 의료진 대시보드 · 운영 백오피스의 백엔드 개발. 백엔드 2인 체제라 인프라도 함께 맡아, 콘솔 수작업이던 AWS 구성을 Terraform과 PR plan → apply 흐름으로 옮김</p>
+      <ul>
+        <li>
+          <span class="item-title">3개 서비스에 누락된 R2DBC 커넥션 풀 적용</span>
+          커스텀 ConnectionFactory 빈 등록으로 Spring Boot의 자동 풀링이 비활성화되어, 쿼리마다 DB 연결을 새로 맺고 있었음. 공통으로 사용하는 빈에 커넥션 풀을 적용해 100요청 동안 생성되는 MySQL 연결을 <strong>201개 → 1개</strong>로 줄임
+        </li>
+        <li>
+          <span class="item-title">운영 조건을 재현해 리포트 API의 GC 병목 확인</span>
+          개발 장비에서 안전해 보이던 리포트 API를 운영 태스크 조건(힙 약 256MB, SerialGC)으로 재측정하니 <strong>CPU의 44%</strong>가 GC에 쓰이고 있었음. 힙·코어·GC를 하나씩 바꿔 비교해 원인을 힙 크기로 좁히고, 요청당 적재 행 축소와 태스크 메모리 상향을 권고
+        </li>
+        <li>
+          <span class="item-title">운영 백오피스 인증 체인과 병원 승인 API 개발</span>
+          로그인(Cognito·HttpOnly 쿠키)을 만들고, 백오피스가 호출하는 dashboard gRPC에서도 토큰을 다시 검증해 백오피스를 사칭한 호출이 통과하지 못하게 함. 병원 승인은 조건부 UPDATE로 동시 요청 중 한 건만 성공시켜 안내 문자 중복 발송을 막음
+        </li>
+        <li>
+          <span class="item-title">dashboard 통합 테스트 206초 → 41초</span>
+          @DirtiesContext 12개로 인한 Spring 컨텍스트 재기동을 Redis 정리와 DB 스냅샷 복구로 대체. 테스트 42개를 유지하면서 실행 시간을 단축하고, 정리 방식을 테스트 컨벤션과 PR 템플릿에 반영
+        </li>
+        <li>
+          <span class="item-title">서비스 간 gRPC 호출을 internal ALB로 전환</span>
+          같은 VPC 안의 서비스끼리 NAT와 공인 ALB를 돌아 호출해, NAT 1대가 단일 장애점이고 내부 전용 auth API가 인터넷에 열려 있었음. internal ALB로 3개 환경을 무중단 전환하고, 외부 호출 0건을 확인한 뒤 auth 공인 입구를 닫음
+        </li>
+      </ul>
+    </div>
+
+    <div class="exp">
+      <div class="exp__header">
+        <div>
+          <h3 class="exp__company">마드라스체크</h3>
+          <span class="exp__role">엔터프라이즈개발팀 · 팀원</span>
+        </div>
+        <span class="exp__date">2025.10 - 2026.03</span>
+      </div>
+      <div class="exp__project">
+        <h4>Flow(협업툴) 엔터프라이즈 고객사 구축·운영</h4>
+        <span class="exp__tech">Java · 사내 프레임워크 · PostgreSQL · Redis · Node.js</span>
+      </div>
+      <ul>
+        <li>
+          <span class="item-title">삼성화재 관리자 통계를 설계부터 배포까지 단독 구축</span>
+          운영 DB와 본 서비스 응답에 부담을 주지 않도록, 이벤트를 Redis에 누적했다가 새벽 배치와 화면 진입 시점에 집계 테이블로 옮기는 구조를 만들어 운영에 반영
+        </li>
+        <li>
+          <span class="item-title">통계 정렬 조회를 1초 미만으로 단축</span>
+          사용자 수만큼(7,000명 × 3개) 반복 실행되던 SELECT 절 상관 서브쿼리를 사전 집계 LEFT JOIN으로 교체
+        </li>
+        <li>
+          <span class="item-title">간헐적 롤백의 원인을 커넥션 풀 오염으로 특정</span>
+          성공 메시지 뒤 변경 사항이 간헐적으로 되돌아가는 현상을 사내 프레임워크 분석으로 추적. endTransaction 없이 close한 코드가 auto-commit이 꺼진 커넥션을 풀에 반환하는 것을 확인. 해당 API에 트랜잭션 경계를 적용하고, 같은 위험 패턴이 있는 파일 28개를 찾아 정리
+        </li>
+        <li>
+          <span class="item-title">세션 생성 경로의 인가 결함 수정</span>
+          이행점검에서 지적된 ‘불충분한 인가’를 추적해, 세션이 없으면 요청의 USER_ID로 세션을 생성하는 공통 경로(576개 파일에서 사용)를 원인으로 특정. 요청의 USER_ID와 토큰의 userId가 일치하는지 검증하도록 수정
+        </li>
+        <li>
+          <span class="item-title">금융 고객사 OTP 인증이 무한 반복되던 문제와 우회 경로 수정</span>
+          SSO 세션 생성이 토큰 검증보다 먼저 실행되던 순서 문제를 바로잡고, 이를 가리던 fallback(OTP 영구 생략)까지 제거
+        </li>
+      </ul>
+    </div>
+
+    <div class="exp">
+      <div class="exp__header">
+        <div>
+          <h3 class="exp__company">아이씨티웨이</h3>
+          <span class="exp__role">SI 2팀 · 사원</span>
+        </div>
+        <span class="exp__date">2024.12 - 2025.10</span>
+      </div>
+      <div class="exp__project">
+        <h4>대기정책 시스템 구축</h4>
+        <span class="exp__tech">Java · 전자정부프레임워크 · PostgreSQL · MyBatis</span>
+      </div>
+      <ul>
+        <li>
+          <span class="item-title">차종 분류 체계와 배출계수 관리 기능 개발</span>
+          연구 논문의 교통 배출량 산정 절차를 시스템으로 옮기는 프로젝트에서 차종 분류 체계(SCC)·배출계수 관리와 대용량 엑셀 자료 업로드 기능을 개발
+        </li>
+        <li>
+          <span class="item-title">1년치 차속 데이터 적재 PoC</span>
+          단건 배치로 8~10일로 추정되던 적재(집계 약 1.4억 행)를 줄이려 PL을 설득해 3일간 Spark 기반 PoC를 진행. 단계별 측정으로 DB 저장(2시간 7분 중 1시간 40분)이 병목임을 찾아 JDBC 배치 설정으로 약 1시간까지 줄임. 운영은 일정상 기존 배치로 결정
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <hr class="divider">
+
+  <!-- ===== EDUCATION ===== -->
+  <section class="section">
+    <h2 class="section__title">교육 & 자격</h2>
+    <div class="edu-grid">
+      <div class="edu-col">
+        <h3 class="edu-heading">교육</h3>
+        <div class="edu-item">
+          <span class="edu-date">2024.01 - 2024.12</span>
+          <p class="edu-name">삼성 청년 SW 아카데미 (SSAFY) 11기 · 웹 기술 트랙 수료</p>
+        </div>
+        <div class="edu-item">
+          <span class="edu-date">2017.03 - 2023.08</span>
+          <p class="edu-name">경상국립대학교 · 도시공학과 전공 / 스마트도시건설 복수전공</p>
+        </div>
+      </div>
+      <div class="edu-col">
+        <h3 class="edu-heading">자격증 & 수상</h3>
+        <div class="edu-item">
+          <p class="edu-name">정보처리기사 <span class="edu-date">한국산업인력공단</span></p>
+        </div>
+        <div class="edu-item">
+          <p class="edu-name">삼성 SW 역량 테스트 PRO (B형) <span class="edu-date">삼성전자 2024.08</span></p>
+        </div>
+        <div class="edu-item">
+          <p class="edu-name">SSAFY 공통 프로젝트 우수상 <span class="edu-date">삼성전자 2024.08</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    if (new URLSearchParams(location.search).has('print')) {
+      window.onload = () => window.print();
+    }
+  </script>
+</body>
+</html>

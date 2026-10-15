@@ -110,16 +110,19 @@
   const extraProject = document.getElementById('extra-project');
   let expanded = false;
 
-  toggleBtn.addEventListener('click', () => {
-    expanded = !expanded;
-    extraProject.style.display = expanded ? 'block' : 'none';
-    toggleBtn.textContent = expanded ? '접기' : '더 보기';
+  // 숨겨 둔 카드가 없으면 '더 보기' 버튼도 없다
+  if (toggleBtn && extraProject) {
+    toggleBtn.addEventListener('click', () => {
+      expanded = !expanded;
+      extraProject.style.display = expanded ? 'block' : 'none';
+      toggleBtn.textContent = expanded ? '접기' : '더 보기';
 
-    if (expanded) {
-      extraProject.classList.add('reveal', 'show');
-      extraProject.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-  });
+      if (expanded) {
+        extraProject.classList.add('reveal', 'show');
+        extraProject.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  }
 
   /* ---------- Project Modal ---------- */
   const modalOverlay = document.getElementById('project-modal');

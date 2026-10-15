@@ -79,12 +79,12 @@
       </div>
       <div class="hero__kpi reveal">
         <div class="kpi-card">
-          <span class="kpi-card__number" data-target="88">0</span><span class="kpi-card__unit">%</span>
-          <p class="kpi-card__label">테스트 실행 시간 단축</p>
+          <span class="kpi-card__number" data-target="80">0</span><span class="kpi-card__unit">%</span>
+          <p class="kpi-card__label">통합 테스트 실행 시간 단축</p>
         </div>
         <div class="kpi-card">
-          <span class="kpi-card__number" data-target="90">0</span><span class="kpi-card__unit">%</span>
-          <p class="kpi-card__label">검색 성능 개선</p>
+          <span class="kpi-card__number" data-target="2">0</span><span class="kpi-card__unit">건</span>
+          <p class="kpi-card__label">LINE Armeria에 머지된 PR</p>
         </div>
         <div class="kpi-card kpi-card--text">
           <span class="kpi-card__icon">⬡</span>
@@ -182,7 +182,7 @@
               <ul class="timeline__list">
                 <li>헥사고날 아키텍처 기반 포트/어댑터 계층 분리 설계, 비즈니스 규칙과 인프라 의존성을 격리하여 유지보수성 확보</li>
                 <li>내부 서비스 간 계약 안정성과 인증·세션 컨텍스트 일관성을 위해 gRPC + Armeria 기반 API 개발</li>
-                <li>테스트 구조 최적화를 통해 전체 테스트 실행 시간 <strong>약 88% 단축</strong> (429초 → 50초)</li>
+                <li>테스트 구조 최적화로 dashboard 통합 테스트 <strong>206초 → 41초</strong> (테스트 42개 유지)</li>
               </ul>
             </div>
           </div>
@@ -218,17 +218,13 @@
               <h4>대기정책 시스템 구축</h4>
               <div class="timeline__tags">
                 <span class="tag tag--sm">Java</span>
-                <span class="tag tag--sm">Spring Boot</span>
-                <span class="tag tag--sm">Kafka</span>
-                <span class="tag tag--sm">Spark</span>
+                <span class="tag tag--sm">전자정부프레임워크</span>
                 <span class="tag tag--sm">PostgreSQL</span>
                 <span class="tag tag--sm">MyBatis</span>
               </div>
               <ul class="timeline__list">
-                <li>Kafka와 Spark 기반 분산 처리 아키텍처를 설계하여 대용량 차량 데이터 처리 파이프라인 구축</li>
-                <li>비동기 인덱스 생성 전략 도입으로 데이터 적재 성능 <strong>60% 개선</strong> (1시간 40분 → 40분)</li>
-                <li>배치 처리 구조 개선으로 전체 처리 시간 8~10일 → 3~4일, <strong>약 60% 단축</strong></li>
-                <li>Apache POI 기반 데이터 파싱 및 적재 로직 설계로 안정적인 데이터 처리 환경 구축</li>
+                <li>연구 논문의 교통 배출량 산정 절차를 시스템으로 옮기는 프로젝트에서 차종 분류 체계(SCC)·배출계수 관리와 대용량 엑셀 자료 업로드 기능을 개발</li>
+                <li>단건 배치로 8~10일로 추정되던 1년치 차속 데이터 적재(집계 약 1.4억 행)를 줄이려 PL을 설득해 3일간 Spark 기반 PoC를 진행. 단계별 측정으로 DB 저장(2시간 7분 중 1시간 40분) 병목을 찾아 JDBC 배치 설정으로 약 1시간까지 단축</li>
               </ul>
             </div>
           </div>
@@ -245,9 +241,71 @@
 
       <div class="project-cards" id="project-cards">
 
+        <article class="project-card reveal" data-project="grpc-reflection" style="cursor:pointer;">
+          <div class="project-card__header">
+            <h3>gRPC 응답 폭증을 Armeria 내부 결함까지 추적</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--company">비욘드메디슨</span>
+              <span class="tag tag--category">장애 추적</span>
+            </div>
+          </div>
+          <p class="project-card__summary">Postman gRPC 호출이 504로 끊기던 현상을 ALB 로그와 최소 재현으로 좁혀, Armeria non-blocking 경로의 onReady() 재진입을 근본 원인으로 특정</p>
+          <div class="project-card__metrics">
+            <div class="metric">
+              <span class="metric__label">요청 1건에 돌아온 응답 메시지(정상 1개)</span>
+              <div class="metric__comparison">
+                <span class="metric__after">237개</span>
+              </div>
+            </div>
+          </div>
+          <span class="project-card__detail-hint">클릭하여 상세 보기</span>
+        </article>
+
+        <article class="project-card reveal" data-project="armeria-oss" style="cursor:pointer;">
+          <div class="project-card__header">
+            <h3>LINE Armeria gRPC 모듈 기여</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--personal">오픈소스</span>
+              <span class="tag tag--category">스레드 모델</span>
+            </div>
+          </div>
+          <p class="project-card__summary">gRPC 서버 호출의 스레드 처리 결함을 고치고 비동기 예외 핸들러를 추가. 머지 2건(1.40.0, 1.42.0), 진행 중 1건</p>
+          <div class="project-card__metrics">
+            <div class="metric">
+              <span class="metric__label">머지된 PR</span>
+              <div class="metric__comparison">
+                <span class="metric__after">2건</span>
+              </div>
+            </div>
+          </div>
+          <span class="project-card__detail-hint">클릭하여 상세 보기</span>
+        </article>
+
+        <article class="project-card reveal" data-project="jvm-memory" style="cursor:pointer;">
+          <div class="project-card__header">
+            <h3>운영 조건을 재현해 리포트 API의 GC 병목 확인</h3>
+            <div class="project-card__tags">
+              <span class="tag tag--company">비욘드메디슨</span>
+              <span class="tag tag--category">성능 분석</span>
+            </div>
+          </div>
+          <p class="project-card__summary">개발 장비에서 안전해 보이던 리포트 API를 운영 태스크 조건(힙 약 256MB, SerialGC)으로 다시 측정해 GC 병목을 찾고, 힙·코어·GC를 하나씩 바꿔 원인을 힙 크기로 좁힘</p>
+          <div class="project-card__metrics">
+            <div class="metric">
+              <span class="metric__label">안정 동시 처리 (힙 256MB → 512MB)</span>
+              <div class="metric__comparison">
+                <span class="metric__before">약 1건</span>
+                <span class="metric__arrow">→</span>
+                <span class="metric__after">약 6건</span>
+              </div>
+            </div>
+          </div>
+          <span class="project-card__detail-hint">클릭하여 상세 보기</span>
+        </article>
+
         <article class="project-card reveal" data-project="test-optimization" style="cursor:pointer;">
           <div class="project-card__header">
-            <h3>테스트 구조 최적화를 통한 CI 피드백 루프 개선</h3>
+            <h3>Spring 컨텍스트 재기동을 없애 통합 테스트 시간 단축</h3>
             <div class="project-card__tags">
               <span class="tag tag--company">비욘드메디슨</span>
               <span class="tag tag--category">성능 개선</span>
@@ -256,36 +314,13 @@
           <p class="project-card__summary">컨텍스트 재기동 병목을 정량 측정하고, 테스트 의미를 보존하면서 cleanup 전략으로 전환</p>
           <div class="project-card__metrics">
             <div class="metric">
-              <span class="metric__label">전체 테스트</span>
+              <span class="metric__label">Dashboard 통합 테스트</span>
               <div class="metric__comparison">
-                <span class="metric__before">429s</span>
+                <span class="metric__before">206s</span>
                 <span class="metric__arrow">→</span>
-                <span class="metric__after">50s</span>
+                <span class="metric__after">41s</span>
               </div>
-              <span class="metric__badge">-88%</span>
-            </div>
-          </div>
-          <span class="project-card__detail-hint">클릭하여 상세 보기</span>
-        </article>
-
-        <article class="project-card reveal" data-project="elasticsearch" style="cursor:pointer;">
-          <div class="project-card__header">
-            <h3>Elasticsearch 도입을 통한 대용량 검색 성능 최적화</h3>
-            <div class="project-card__tags">
-              <span class="tag tag--company">아이씨티웨이</span>
-              <span class="tag tag--category">성능 개선</span>
-            </div>
-          </div>
-          <p class="project-card__summary">2,260만 건 LIKE+OFFSET 구조 한계를 역색인 기반 하이브리드 아키텍처로 전환</p>
-          <div class="project-card__metrics">
-            <div class="metric">
-              <span class="metric__label">검색 응답</span>
-              <div class="metric__comparison">
-                <span class="metric__before">20s</span>
-                <span class="metric__arrow">→</span>
-                <span class="metric__after">2s</span>
-              </div>
-              <span class="metric__badge">-90%</span>
+              <span class="metric__badge">-80%</span>
             </div>
           </div>
           <span class="project-card__detail-hint">클릭하여 상세 보기</span>
@@ -293,74 +328,47 @@
 
         <article class="project-card reveal" data-project="stats-pipeline" style="cursor:pointer;">
           <div class="project-card__header">
-            <h3>실시간 집계 파이프라인 설계 및 구축</h3>
+            <h3>운영 DB에 부담을 주지 않는 관리자 통계 집계 설계</h3>
             <div class="project-card__tags">
               <span class="tag tag--company">마드라스체크</span>
               <span class="tag tag--category">아키텍처 설계</span>
             </div>
           </div>
-          <p class="project-card__summary">WAS 부하 분리를 위해 Java–Node.js–Redis–PostgreSQL 분리형 집계 구조를 설계하고 장애 복구까지 고려한 파이프라인 구축</p>
+          <p class="project-card__summary">이벤트는 Redis에 실시간으로 쌓고, 집계 테이블에는 새벽 배치와 관리자 화면 진입 시점에 옮겨 운영 DB 부하 없이 통계를 제공</p>
           <div class="project-card__metrics">
             <div class="metric">
-              <span class="metric__label">통계 조회</span>
-              <div class="metric__comparison">
-                <span class="metric__before">20s</span>
-                <span class="metric__arrow">→</span>
-                <span class="metric__after">1s</span>
-              </div>
-              <span class="metric__badge">-95%</span>
+              <span class="metric__label">정렬 조회 시간</span>
+                <div class="metric__comparison">
+                  <span class="metric__before">수 초</span>
+                  <span class="metric__arrow">→</span>
+                  <span class="metric__after">1초 미만</span>
+                </div>
             </div>
           </div>
           <span class="project-card__detail-hint">클릭하여 상세 보기</span>
         </article>
 
-        <article class="project-card reveal" data-project="caffeine" style="cursor:pointer;">
+        <article class="project-card reveal" data-project="connection-pool" style="cursor:pointer;">
           <div class="project-card__header">
-            <h3>Caffeine 캐시 적용을 통한 퀴즈 API 성능 최적화</h3>
+            <h3>커넥션 풀 오염으로 생긴 간헐적 롤백 추적</h3>
             <div class="project-card__tags">
-              <span class="tag tag--personal">팀 프로젝트</span>
-              <span class="tag tag--category">성능 개선</span>
+              <span class="tag tag--company">마드라스체크</span>
+              <span class="tag tag--category">장애 추적</span>
             </div>
           </div>
-          <p class="project-card__summary">조회 빈도 높고 변경 빈도 낮은 데이터 특성을 분석하여 로컬 캐시 전략 도입</p>
+          <p class="project-card__summary">성공 메시지 뒤에 간헐적으로 되돌아가던 변경을 사내 프레임워크 분석으로 추적해, auto-commit이 꺼진 채 풀에 반납된 커넥션을 원인으로 특정</p>
           <div class="project-card__metrics">
             <div class="metric">
-              <span class="metric__label">응답 속도</span>
+              <span class="metric__label">같은 위험 패턴 정리</span>
               <div class="metric__comparison">
-                <span class="metric__after">70% 단축</span>
+                <span class="metric__after">파일 28개</span>
               </div>
-              <span class="metric__badge">-70%</span>
             </div>
           </div>
-          <span class="project-card__detail-hint">클릭하여 상세 보기</span>
-        </article>
-
-        <article class="project-card reveal" data-project="websocket" style="cursor:pointer;">
-          <div class="project-card__header">
-            <h3>Spring WebSocket을 활용한 실시간 퀴즈 배틀 기능 구현</h3>
-            <div class="project-card__tags">
-              <span class="tag tag--personal">팀 프로젝트</span>
-              <span class="tag tag--category">실시간 설계</span>
-            </div>
-          </div>
-          <p class="project-card__summary">폴링 한계를 해소하기 위해 WebSocket + STOMP로 배틀방 단위 양방향 통신 구현</p>
-          <span class="project-card__detail-hint">클릭하여 상세 보기</span>
-        </article>
-
-        <article class="project-card reveal" id="extra-project" data-project="saga-outbox" style="display:none;cursor:pointer;">
-          <div class="project-card__header">
-            <h3>Saga 및 Outbox 패턴 기반의 분산 트랜잭션 구현</h3>
-            <div class="project-card__tags">
-              <span class="tag tag--personal">개인 프로젝트</span>
-              <span class="tag tag--category">아키텍처 설계</span>
-            </div>
-          </div>
-          <p class="project-card__summary">2PC 대신 Saga + Outbox + Debezium으로 At-Least-Once 보장 분산 트랜잭션 설계</p>
           <span class="project-card__detail-hint">클릭하여 상세 보기</span>
         </article>
 
       </div>
-      <button class="btn-more" id="toggle-projects">더 보기</button>
     </section>
 
     <!-- ===== EDUCATION ===== -->
@@ -389,7 +397,7 @@
             <p class="edu__name">정보처리기사</p>
           </div>
           <div class="edu__item">
-            <span class="edu__date">삼성전자 2024.06</span>
+            <span class="edu__date">삼성전자 2024.08</span>
             <p class="edu__name">삼성 역량 평가 PRO (B형)</p>
           </div>
           <div class="edu__item">
@@ -441,8 +449,162 @@
   </div>
 
   <!-- Modal Templates (hidden) -->
+  <template id="tpl-grpc-reflection">
+    <h2 class="modal__title">gRPC 응답 폭증을 Armeria 내부 결함까지 추적</h2>
+    <p class="modal__meta">비욘드메디슨 · Clickless · 2026.08</p>
+    <div class="modal__tags">
+      <span class="tag tag--category">장애 추적</span>
+      <span class="tag">Kotlin</span><span class="tag">Armeria</span><span class="tag">gRPC</span><span class="tag">AWS ALB</span>
+    </div>
+
+    <section class="modal__section">
+      <h3>원인 구조</h3>
+      <img class="modal__arch-img" src="images/grpc-reflection-architecture.svg" alt="gRPC 리플렉션 응답 폭증 원인 구조">
+    </section>
+
+    <section class="modal__section">
+      <h3>배경</h3>
+      <p>dev 환경에서 Postman의 gRPC 호출이 504로 끊기고, dashboard CPU가 100%로 7시간 넘게 포화됐습니다. 예외가 나지 않아 에러 알림에 잡히지 않았고, 업무 RPC는 정상이라 장애로 인식되지 않던 상태였습니다. 원인이 된 변경은 두 달 전에 이미 배포돼 있었습니다.</p>
+    </section>
+
+    <section class="modal__section">
+      <h3>추적과 판단</h3>
+      <div class="modal__trouble">
+        <h4>분기점 찾기</h4>
+        <p>ALB 액세스 로그에서 리플렉션 응답의 건당 크기를 날짜별로 집계했습니다. 06-17 4.2KB에서 06-18 864.9KB로 하루 만에 200배 커졌고, 그날 배포된 변경은 인터셉터를 코루틴 기반으로 바꾼 리팩터링이었습니다.</p>
+      </div>
+      <div class="modal__trouble">
+        <h4>가설 기각과 최소 재현</h4>
+        <p>의심받던 라이브러리 일괄 상향은 Armeria 1.38과 1.40에서 똑같이 재현돼 기각했습니다. 아무 일도 하지 않는 코루틴 인터셉터만 걸어도 같은 현상이 재현돼, 인터셉터의 내용이 아니라 종류가 조건임을 확인했습니다.</p>
+      </div>
+      <div class="modal__trouble">
+        <h4>근본 원인</h4>
+        <p>ProtoReflectionServiceV1은 onReady 신호마다 대기 중인 응답을 보내고, 응답을 쓴 뒤에야 처리 중인 요청을 비웁니다. Armeria의 non-blocking 경로가 진행 중인 콜백 안에서 onReady()를 다시 호출하면서 같은 응답이 반복 전송됐습니다. ALB의 60초 제한은 원인이 아니라 결함을 드러낸 계기였습니다.</p>
+      </div>
+    </section>
+
+    <section class="modal__section">
+      <h3>결과</h3>
+      <div class="modal__metrics">
+        <div class="metric">
+          <span class="metric__label">요청 1건에 돌아온 응답 메시지(정상 1개)</span>
+          <div class="metric__comparison">
+            <span class="metric__after">237개</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);line-height:1.7;">팀은 리플렉션을 인터셉터 없는 별도 서비스로 분리하고 운영 환경에서는 등록하지 않는 방식으로 우회했습니다. 근본 원인은 순정 Armeria로 만든 최소 재현(요청 6건에 응답 11건)과 함께 이슈로 등록했고(#6938), 수정 PR(#6931)은 진행 중입니다.</p>
+    </section>
+  </template>
+
+  <template id="tpl-armeria-oss">
+    <h2 class="modal__title">LINE Armeria gRPC 모듈 기여</h2>
+    <p class="modal__meta">오픈소스 · line/armeria · 2026.04 - 현재</p>
+    <div class="modal__tags">
+      <span class="tag tag--category">스레드 모델</span>
+      <span class="tag">Java</span><span class="tag">Netty</span><span class="tag">gRPC</span>
+    </div>
+
+    <section class="modal__section">
+      <h3>#6947 Before / After</h3>
+      <img class="modal__arch-img" src="images/armeria-serde-architecture.svg" alt="Armeria gRPC 직렬화 스레드 Before/After">
+    </section>
+
+    <section class="modal__section">
+      <h3>배경</h3>
+      <p>Armeria는 Netty 기반 JVM 마이크로서비스 프레임워크이고, 회사 서비스가 gRPC 서버로 쓰고 있습니다. 업무에서 만난 gRPC 문제를 프레임워크 코드까지 따라가 이슈와 PR로 올렸습니다.</p>
+    </section>
+
+    <section class="modal__section">
+      <h3>기여 내역</h3>
+      <div class="modal__trouble">
+        <h4>#6947 머지 (1.42.0) — blocking executor 사용 시 gRPC 직렬화·역직렬화의 실행 스레드 수정</h4>
+        <p>blocking executor를 켜도 요청 역직렬화와 응답 직렬화가 이벤트 루프에서 돌던 결함(#6241)을 고쳤습니다. 버퍼가 스레드를 건너게 되면서, 역직렬화가 실패하면 대기 중인 콜백을 건너뛰고 보내지 못한 응답 버퍼는 해제하도록 했습니다. 압축 협상도 직렬화보다 먼저 끝나도록 헤더 처리 위치를 옮겼습니다.</p>
+      </div>
+      <div class="modal__trouble">
+        <h4>#6717 머지 (1.40.0 신규 기능) — 비동기 gRPC 예외 핸들러</h4>
+        <p>에러 메시지 다국어 조회에 runBlocking을 쓰던 사내 코드에서 출발해, 동기 전용이던 예외 핸들러의 비동기 지원(applyAsync)을 제안하고 구현했습니다.</p>
+      </div>
+      <div class="modal__trouble">
+        <h4>#6938 이슈 · #6931 진행 중 — onReady() 재진입</h4>
+        <p>앞의 리플렉션 사례에서 찾은 결함의 수정입니다.</p>
+      </div>
+    </section>
+
+    <section class="modal__section">
+      <h3>결과</h3>
+      <div class="modal__metrics">
+        <div class="metric">
+          <span class="metric__label">머지된 PR</span>
+          <div class="metric__comparison">
+            <span class="metric__after">2건</span>
+          </div>
+        </div>
+        <div class="metric">
+          <span class="metric__label">진행 중 PR</span>
+          <div class="metric__comparison">
+            <span class="metric__after">1건</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);line-height:1.7;">1.40.0과 1.42.0 릴리스 노트에 기여자로 이름이 올랐습니다.</p>
+    </section>
+  </template>
+
+  <template id="tpl-jvm-memory">
+    <h2 class="modal__title">운영 조건을 재현해 리포트 API의 GC 병목 확인</h2>
+    <p class="modal__meta">비욘드메디슨 · Clickless · 2026.06</p>
+    <div class="modal__tags">
+      <span class="tag tag--category">성능 분석</span>
+      <span class="tag">Kotlin</span><span class="tag">JVM</span><span class="tag">SerialGC</span><span class="tag">AWS ECS</span>
+    </div>
+
+    <section class="modal__section">
+      <h3>분석 흐름</h3>
+      <img class="modal__arch-img" src="images/jvm-memory-architecture.svg" alt="운영 조건 재현 메모리 분석 흐름">
+    </section>
+
+    <section class="modal__section">
+      <h3>배경</h3>
+      <p>데이터를 메모리로 끌어와 가공하는 API가 사용자 증가를 버티는지 판단이 필요했습니다. 정적 분석으로 고위험 지점을 고른 뒤 가장 무거운 리포트 API를 실측했고, 힙 1GB·멀티코어로 처음 잰 결과는 안전해 보였습니다.</p>
+    </section>
+
+    <section class="modal__section">
+      <h3>추적과 판단</h3>
+      <div class="modal__trouble">
+        <h4>측정 조건이 운영과 달랐다</h4>
+        <p>처음 측정은 개발 장비 기준이었습니다. 운영 태스크는 힙과 코어가 훨씬 작아 JVM이 다른 GC를 고르기 때문에(그림의 운영 조건), 같은 조건을 로컬에 만들어 다시 측정하니 GC 병목이 드러났습니다.</p>
+      </div>
+      <div class="modal__trouble">
+        <h4>원인 분리</h4>
+        <p>변수를 하나씩 바꿔 보니 힙을 늘리면 처리량이 좋아졌고, 코어를 늘린 구성(2vCPU, G1)은 같은 힙의 1코어 구성과 결과가 거의 같아 권고하지 않았습니다.</p>
+      </div>
+    </section>
+
+    <section class="modal__section">
+      <h3>결과</h3>
+      <div class="modal__metrics">
+        <div class="metric">
+          <span class="metric__label">GC에 쓰인 CPU (Full GC 863회)</span>
+          <div class="metric__comparison">
+            <span class="metric__after">44%</span>
+          </div>
+        </div>
+        <div class="metric">
+          <span class="metric__label">안정 동시 처리 (힙 256MB → 512MB)</span>
+          <div class="metric__comparison">
+            <span class="metric__before">약 1건</span>
+            <span class="metric__arrow">→</span>
+            <span class="metric__after">약 6건</span>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);line-height:1.7;">현재 운영 조건에서 동시 12요청의 p99는 19.26초였습니다. 요청당 적재 행 축소(근본 해결)와 태스크 메모리 상향(빠른 완화)을 권고했습니다.</p>
+    </section>
+  </template>
+
   <template id="tpl-test-optimization">
-    <h2 class="modal__title">테스트 구조 최적화를 통한 CI 피드백 루프 개선</h2>
+    <h2 class="modal__title">Spring 컨텍스트 재기동을 없애 통합 테스트 시간 단축</h2>
     <p class="modal__meta">비욘드메디슨 · Clickless · 2026.03</p>
     <div class="modal__tags">
       <span class="tag tag--category">성능 개선</span>
@@ -456,20 +618,20 @@
 
     <section class="modal__section">
       <h3>기술 선택 이유</h3>
-      <p>전체 테스트 실행 시간 429초 중 실제 테스트 로직 비용은 미미했고, <strong>병목은 @DirtiesContext로 인한 Spring 컨텍스트 재기동</strong>이었습니다. baseline 측정 스크립트를 만들어 모듈별 비용을 정량화한 후, 가장 비싼 모듈부터 순차 최적화하는 전략을 선택했습니다.</p>
-      <p>테스트 삭제나 assertion 약화가 아닌, <strong>"같은 의미를 더 싸게 유지"</strong>하는 것을 원칙으로 세웠습니다. mock 기반 치환으로 bootstrap 의미가 사라지는 것도 금지했습니다.</p>
+      <p>dashboard 통합 테스트에서 테스트 로직 자체에 드는 시간은 미미했고, <strong>병목은 @DirtiesContext로 인한 Spring 컨텍스트 재기동</strong>이었습니다. baseline 측정 스크립트로 모듈별 실행 시간을 잰 뒤, 가장 오래 걸리는 모듈부터 개선했습니다.</p>
+      <p>테스트를 지우거나 assertion을 약하게 만들지 않고, 같은 검증을 유지한 채 재기동 비용만 줄이기로 했습니다. 실제 기동을 검증하는 bootstrap 테스트를 mock으로 바꾸지도 않았습니다.</p>
     </section>
 
     <section class="modal__section">
       <h3>트러블슈팅</h3>
       <div class="modal__trouble">
-        <h4>Dashboard Bootstrap: 207s → 3s</h4>
-        <p><strong>문제:</strong> @SpringBootTest + Testcontainers + @DirtiesContext(BEFORE_CLASS) 조합으로 테스트마다 컨텍스트가 재기동되어 207초 소요.</p>
+        <h4>Dashboard Bootstrap: 컨텍스트 재기동 제거</h4>
+        <p><strong>문제:</strong> @SpringBootTest + Testcontainers + @DirtiesContext(BEFORE_CLASS) 조합으로 테스트마다 컨텍스트가 재기동됨.</p>
         <p><strong>원인:</strong> JUnit 인스턴스 수가 아니라 컨텍스트 재기동 횟수가 진짜 비용. 매 테스트 클래스마다 Spring Boot + Testcontainers가 새로 뜨고 있었음.</p>
-        <p><strong>해결:</strong> @DirtiesContext를 무작정 제거하지 않고, 먼저 cleanup 경로를 구축. Redis 상태는 clearRedisState() helper로 session/profile/lock 정리, DB write 테스트는 snapshot restore로 복구. maxParallelForks=1로 컨텍스트 캐시 보호.</p>
+        <p><strong>해결:</strong> @DirtiesContext를 무작정 제거하지 않고, 먼저 cleanup 경로를 구축. Redis 상태는 clearRedisState() helper로 session/profile/lock 정리, DB write 테스트는 snapshot restore로 복구. maxParallelForks=1로 컨텍스트 캐시 보호. 테스트 42개는 그대로 유지.</p>
       </div>
       <div class="modal__trouble">
-        <h4>DTX Outbound: 94s → 3s</h4>
+        <h4>DTX Outbound: 외부 연동 테스트 분리</h4>
         <p><strong>문제:</strong> 외부 연동 테스트가 기본 test 태스크에 섞여 있어, 불필요한 외부 호출 + 컨텍스트 재기동 발생.</p>
         <p><strong>해결:</strong> 테스트 타입을 unit/component/bootstrap/external integration 4단계로 분류. 외부 실연동 테스트는 삭제하지 않되 전용 태스크와 태그로 분리하여 fast suite에서 제외.</p>
       </div>
@@ -479,104 +641,28 @@
       <h3>성과</h3>
       <div class="modal__metrics">
         <div class="metric">
-          <span class="metric__label">전체 테스트</span>
+          <span class="metric__label">Dashboard 통합 테스트</span>
           <div class="metric__comparison">
-            <span class="metric__before">429s</span>
+            <span class="metric__before">206s</span>
             <span class="metric__arrow">→</span>
-            <span class="metric__after">50s</span>
+            <span class="metric__after">41s</span>
           </div>
-          <span class="metric__badge">-88%</span>
+          <span class="metric__badge">-80%</span>
         </div>
         <div class="metric">
-          <span class="metric__label">Dashboard Bootstrap</span>
+          <span class="metric__label">@DirtiesContext</span>
           <div class="metric__comparison">
-            <span class="metric__before">207s</span>
+            <span class="metric__before">12개</span>
             <span class="metric__arrow">→</span>
-            <span class="metric__after">3s</span>
+            <span class="metric__after">0개</span>
           </div>
-          <span class="metric__badge">-98%</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">DTX Outbound</span>
-          <div class="metric__comparison">
-            <span class="metric__before">94s</span>
-            <span class="metric__arrow">→</span>
-            <span class="metric__after">3s</span>
-          </div>
-          <span class="metric__badge">-97%</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">Auth Outbound</span>
-          <div class="metric__comparison">
-            <span class="metric__before">37s</span>
-            <span class="metric__arrow">→</span>
-            <span class="metric__after">1s</span>
-          </div>
-          <span class="metric__badge">-97%</span>
-        </div>
-      </div>
-    </section>
-  </template>
-
-  <template id="tpl-elasticsearch">
-    <h2 class="modal__title">Elasticsearch 도입을 통한 대용량 데이터 검색 성능 최적화</h2>
-    <p class="modal__meta">아이씨티웨이 · 대기정책 시스템 · 2024.12 - 2025.10</p>
-    <div class="modal__tags">
-      <span class="tag tag--category">성능 개선</span>
-      <span class="tag">Java</span><span class="tag">Spring Boot</span><span class="tag">Elasticsearch</span><span class="tag">PostgreSQL</span><span class="tag">Kafka</span>
-    </div>
-
-    <section class="modal__section">
-      <h3>아키텍처</h3>
-      <img class="modal__arch-img" src="images/elasticsearch-architecture.png" alt="Elasticsearch 하이브리드 아키텍처">
-    </section>
-
-    <section class="modal__section">
-      <h3>기술 선택 이유</h3>
-      <p>약 2,260만 건의 차량 등록 데이터에서 <code>LIKE '%검색어%'</code> 쿼리가 B-Tree 인덱스를 무력화시키고, <code>OFFSET 999990</code>이 사실상 전체 데이터를 읽고 버리는 구조였습니다.</p>
-      <p>PostgreSQL의 GIN 인덱스 + Full Text Search도 검토했으나, OFFSET 기반 페이지네이션의 구조적 한계(뒤 페이지로 갈수록 선형 성능 저하)는 해결 불가하다고 판단. <strong>역색인(Inverted Index) 기반으로 데이터 접근 방식 자체를 전환</strong>하기 위해 Elasticsearch를 선택했습니다.</p>
-      <p>데이터 정합성이 중요한 원본은 PostgreSQL에 유지하고, 검색은 Elasticsearch가 전담하는 하이브리드 아키텍처를 설계했습니다.</p>
-    </section>
-
-    <section class="modal__section">
-      <h3>트러블슈팅</h3>
-      <div class="modal__trouble">
-        <h4>2,260만 건 데이터 마이그레이션</h4>
-        <p><strong>문제:</strong> 대용량 데이터를 한번에 Elasticsearch로 이관 시 메모리 초과 및 타임아웃 발생.</p>
-        <p><strong>해결:</strong> 배치 기반 마이그레이션 프로세스를 구축하여 5만 건씩 청크 단위로 안정적 이관. 비효율적인 LIKE 쿼리는 Bool Query + Wildcard Query 네이티브 쿼리로 대체.</p>
-      </div>
-      <div class="modal__trouble">
-        <h4>Deep Pagination 제한</h4>
-        <p><strong>문제:</strong> Elasticsearch의 max_result_window 기본값(10,000) 제한으로 전체 페이지 접근 불가.</p>
-        <p><strong>해결:</strong> max_result_window 제한 해제 + 인덱스 설정 최적화로 Deep Pagination 지원.</p>
-      </div>
-    </section>
-
-    <section class="modal__section">
-      <h3>성과</h3>
-      <div class="modal__metrics">
-        <div class="metric">
-          <span class="metric__label">검색 응답 (마지막 페이지)</span>
-          <div class="metric__comparison">
-            <span class="metric__before">20s</span>
-            <span class="metric__arrow">→</span>
-            <span class="metric__after">2s</span>
-          </div>
-          <span class="metric__badge">-90%</span>
-        </div>
-        <div class="metric">
-          <span class="metric__label">PostgreSQL 부하</span>
-          <div class="metric__comparison">
-            <span class="metric__after">70% 감소</span>
-          </div>
-          <span class="metric__badge">-70%</span>
         </div>
       </div>
     </section>
   </template>
 
   <template id="tpl-stats-pipeline">
-    <h2 class="modal__title">실시간 집계 파이프라인 설계 및 구축</h2>
+    <h2 class="modal__title">운영 DB에 부담을 주지 않는 관리자 통계 집계 설계</h2>
     <p class="modal__meta">마드라스체크 · 삼성화재 통계 고도화 · 2025.10 - 2026.03</p>
     <div class="modal__tags">
       <span class="tag tag--category">아키텍처 설계</span>
@@ -590,9 +676,9 @@
 
     <section class="modal__section">
       <h3>기술 선택 이유</h3>
-      <p>기존 통계 조회는 원본 테이블을 매번 조인하는 방식으로, 데이터가 누적될수록 <strong>조회 쿼리가 20초 이상</strong> 소요되었습니다. 매 액션마다 DB에 직접 INSERT하면 WAS 부하가 급증하는 문제도 있었습니다.</p>
-      <p>Kafka/RabbitMQ 도입도 검토했으나, <strong>현재 규모에서는 오버엔지니어링</strong>이라 판단. 대신 기존에 사용 중인 Redis를 버퍼로 활용하여 쓰기 성능을 확보하고, 별도 Node.js 서버로 <strong>기존 WAS에 영향 없이 부하를 분리</strong>하는 구조를 선택했습니다.</p>
-      <p>Redis의 HINCRBY/ZADD NX 원자적 연산으로 동시성 문제를 자연스럽게 해결하고, 키 패턴을 PostgreSQL PK와 일치시켜 이관 시 파싱 비용을 최소화했습니다.</p>
+      <p>기존 통계 조회는 원본 테이블을 매번 집계하는 방식이라 운영 테이블에 부하가 갔고, 정렬 조회에서는 SELECT 절의 상관 서브쿼리가 <strong>사용자 수만큼(7,000명 × 3개) 반복 실행</strong>됐습니다. 매 액션마다 DB에 직접 쓰면 본 서비스 응답이 느려지는 문제도 있었습니다.</p>
+      <p>새 메시지 브로커를 도입하는 대신 기존에 쓰던 Redis를 버퍼로 활용해 쓰기 성능을 확보하고, 별도 Node.js 서버로 <strong>집계 부하를 WAS 밖으로 분리</strong>하는 구조를 선택했습니다.</p>
+      <p>Redis의 HINCRBY/ZADD NX로 이벤트 누적을 원자적으로 처리하고, 키 패턴을 PostgreSQL PK와 일치시켜 이관 시 파싱 비용을 줄였습니다.</p>
     </section>
 
     <section class="modal__section">
@@ -610,7 +696,7 @@
       <div class="modal__trouble">
         <h4>Node.js 전송 실패 시 데이터 유실</h4>
         <p><strong>문제:</strong> Java → Node.js HTTP 전송 실패 시 이벤트 데이터 유실 가능.</p>
-        <p><strong>해결:</strong> 실패 시 로컬 파일 백업(/mount/stats-backup/) → 자정 배치에서 자동 복구하는 경로를 설계. 메시지 큐 없이도 파일 시스템 기반으로 신뢰성 확보.</p>
+        <p><strong>해결:</strong> 실패 시 로컬 파일 백업(/mount/stats-backup/) → 자정 배치에서 자동 복구하는 경로를 설계. 메시지 큐 없이 파일 백업으로 유실 구간을 메움.</p>
       </div>
     </section>
 
@@ -618,126 +704,62 @@
       <h3>성과</h3>
       <div class="modal__metrics">
         <div class="metric">
-          <span class="metric__label">통계 조회</span>
-          <div class="metric__comparison">
-            <span class="metric__before">20s</span>
-            <span class="metric__arrow">→</span>
-            <span class="metric__after">1s 이내</span>
-          </div>
-          <span class="metric__badge">-95%</span>
+          <span class="metric__label">정렬 조회 시간</span>
+                <div class="metric__comparison">
+                  <span class="metric__before">수 초</span>
+                  <span class="metric__arrow">→</span>
+                  <span class="metric__after">1초 미만</span>
+                </div>
         </div>
       </div>
-      <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);line-height:1.7;">기존 원본 테이블 조인 방식에서 사전 집계 테이블 조회로 전환하여 통계 페이지 응답 시간 대폭 단축. WAS와 집계 로직을 완전 분리하여 기존 서비스 안정성 유지. 장애 시에도 파일 백업 → 배치 복구 경로로 데이터 정합성 보장.</p>
+      <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);line-height:1.7;">원본 테이블을 매번 집계하던 조회를 사전 집계 테이블 조회로 바꿔 운영에 반영했습니다. 전송 실패분은 파일 백업 → 배치 복구로 메우되, Redis → PostgreSQL 이관 중 들어온 1~2건의 오차는 관리자 통계 특성상 허용했습니다.</p>
     </section>
   </template>
 
-  <template id="tpl-caffeine">
-    <h2 class="modal__title">Caffeine 캐시 적용을 통한 퀴즈 API 성능 최적화</h2>
-    <p class="modal__meta">팀 프로젝트 · Cram · 2025.03</p>
+  <template id="tpl-connection-pool">
+    <h2 class="modal__title">커넥션 풀 오염으로 생긴 간헐적 롤백 추적</h2>
+    <p class="modal__meta">마드라스체크 · Flow 공공기관 고객사 · 2026.01</p>
     <div class="modal__tags">
-      <span class="tag tag--category">성능 개선</span>
-      <span class="tag">Spring Boot</span><span class="tag">Caffeine</span><span class="tag">Redis</span><span class="tag">k6</span>
+      <span class="tag tag--category">장애 추적</span>
+      <span class="tag">Java</span><span class="tag">JDBC</span><span class="tag">Tomcat</span>
     </div>
 
     <section class="modal__section">
-      <h3>아키텍처</h3>
-      <img class="modal__arch-img" src="images/caffeine-architecture.png" alt="Caffeine 캐시 아키텍처">
+      <h3>원인 구조</h3>
+      <img class="modal__arch-img" src="images/connection-pool-architecture.svg" alt="커넥션 풀 오염 원인 구조">
     </section>
 
     <section class="modal__section">
-      <h3>기술 선택 이유</h3>
-      <p>퀴즈 목록/상세 조회 API가 반복적으로 DB에 접근하여 성능 저하가 발생했습니다. 특히 인기 퀴즈와 데일리 퀴즈는 <strong>조회 빈도가 높지만 변경 빈도가 낮은</strong> 특성을 가지고 있었습니다.</p>
-      <p>분산 캐시(Redis)는 이미 세션 관리에 사용 중이었고, 조회 전용 데이터에 네트워크 hop을 추가할 필요가 없다고 판단. <strong>단일 인스턴스 환경에서 로컬 캐시가 적합</strong>하다고 결론 내리고 Caffeine을 선택했습니다.</p>
-      <p>데이터 변경 시 @CacheEvict로 캐시를 무효화하고, k6 성능 테스트로 적용 전후를 정량적으로 검증했습니다.</p>
+      <h3>배경</h3>
+      <p>공공기관 고객사에서 즐겨찾기 순서를 바꾸면 성공 메시지가 뜬 뒤 간헐적으로 원래대로 돌아갔습니다. 같은 요청도 될 때와 안 될 때가 섞여 재현이 어려웠습니다.</p>
     </section>
 
     <section class="modal__section">
-      <h3>트러블슈팅</h3>
+      <h3>추적과 판단</h3>
       <div class="modal__trouble">
-        <h4>캐시 일관성 관리</h4>
-        <p><strong>문제:</strong> 퀴즈 데이터 수정/삭제 시 캐시에 이전 데이터가 남아 불일치 발생 가능.</p>
-        <p><strong>해결:</strong> 변경 빈도가 낮은 데이터에 @Cacheable 적용, 데이터 변경 시 @CacheEvict로 관련 캐시를 즉시 무효화하여 일관성 보장.</p>
+        <h4>트랜잭션 없는 쓰기에서 출발</h4>
+        <p>해당 API가 트랜잭션 없이 UPDATE한다는 점에서 출발해 사내 프레임워크 jar를 분석했습니다.</p>
+      </div>
+      <div class="modal__trouble">
+        <h4>오염된 커넥션</h4>
+        <p>프레임워크의 beginTransaction()은 auto-commit을 끄고, endTransaction()만 다시 켭니다. 그런데 endTransaction 없이 close()로 끝내는 코드가 있어 auto-commit이 꺼진 커넥션이 풀로 돌아갔고, 풀도 반납·대여 때 이 값을 되돌리지 않았습니다. 이 커넥션을 받은 즐겨찾기 API는 commit 없이 UPDATE만 하므로 변경이 커밋되지 않은 채 끝났습니다. 성공 메시지는 떴지만 다른 커넥션으로 다시 조회하면 변경 전 값이 보였고, 오염된 커넥션을 받은 요청에서만 생겨 간헐적으로 보였습니다.</p>
       </div>
     </section>
 
     <section class="modal__section">
-      <h3>성과</h3>
+      <h3>결과</h3>
       <div class="modal__metrics">
         <div class="metric">
-          <span class="metric__label">API 응답 속도</span>
+          <span class="metric__label">같은 위험 패턴 정리</span>
           <div class="metric__comparison">
-            <span class="metric__after">70% 단축</span>
+            <span class="metric__after">파일 28개</span>
           </div>
-          <span class="metric__badge">-70%</span>
         </div>
       </div>
+      <p style="margin-top:12px;font-size:0.85rem;color:var(--text-secondary);line-height:1.7;">해당 API에는 트랜잭션 경계를 적용했고, 같은 위험(beginTransaction 뒤 endTransaction 누락)이 있는 파일 28개를 찾아 정리했습니다. 커넥션 반납 시 풀에서 auto-commit을 복구하도록 설정을 보완하는 방안도 제안했습니다.</p>
     </section>
   </template>
 
-  <template id="tpl-websocket">
-    <h2 class="modal__title">Spring WebSocket을 활용한 실시간 퀴즈 배틀 기능 구현</h2>
-    <p class="modal__meta">팀 프로젝트 · Cram · 2025.03</p>
-    <div class="modal__tags">
-      <span class="tag tag--category">실시간 설계</span>
-      <span class="tag">Spring Boot</span><span class="tag">WebSocket</span><span class="tag">STOMP</span><span class="tag">Redis</span>
-    </div>
-
-    <section class="modal__section">
-      <h3>아키텍처</h3>
-      <img class="modal__arch-img" src="images/websocket-architecture.png" alt="WebSocket 실시간 통신 아키텍처">
-    </section>
-
-    <section class="modal__section">
-      <h3>기술 선택 이유</h3>
-      <p>사용자 간 실시간 상호작용(배틀 참가/퇴장, 준비 상태, 정답 제출, 점수 변화)을 동기화해야 했습니다. HTTP 폴링 방식은 <strong>불필요한 트래픽 유발 + 실시간성 한계</strong>가 명확했습니다.</p>
-      <p>SSE(Server-Sent Events)도 검토했으나, 클라이언트→서버 방향 통신이 필요한 양방향 특성상 <strong>WebSocket이 적합</strong>하다고 판단. STOMP 프로토콜을 도입하여 배틀방 단위의 구독/발행 패턴으로 메시지 격리를 구현했습니다.</p>
-    </section>
-
-    <section class="modal__section">
-      <h3>트러블슈팅</h3>
-      <div class="modal__trouble">
-        <h4>동시 정답 제출 시 동시성 문제</h4>
-        <p><strong>문제:</strong> 여러 사용자가 동시에 정답을 제출할 때 점수/순위 계산에서 race condition 발생.</p>
-        <p><strong>해결:</strong> 배틀방 상태 변경 로직에 @Synchronized 처리를 적용하고, 배틀 상태를 BattleRoomStatus Enum으로 관리. 추후 Redis 분산 락 활용으로 확장 가능하도록 설계.</p>
-      </div>
-      <div class="modal__trouble">
-        <h4>배틀방 메시지 격리</h4>
-        <p><strong>문제:</strong> 전체 브로드캐스팅 시 다른 배틀방 참가자에게도 메시지가 전달되는 문제.</p>
-        <p><strong>해결:</strong> /sub/battle/room/{roomId} 경로로 배틀방별 구독 채널을 분리. Simple Message Broker를 활용하여 특정 roomId를 구독 중인 클라이언트에게만 상태 변경 메시지 전송.</p>
-      </div>
-    </section>
-
-    <section class="modal__section">
-      <h3>성과</h3>
-      <p>실시간 퀴즈 배틀 기능 구현 완료. 폴링 대비 서버/네트워크 부하 감소 및 실시간성 보장. WebSocket + STOMP 기반 메시징 아키텍처 구축 경험 확보.</p>
-    </section>
-  </template>
-
-  <template id="tpl-saga-outbox">
-    <h2 class="modal__title">Saga 및 Outbox 패턴 기반의 분산 트랜잭션 구현</h2>
-    <p class="modal__meta">개인 프로젝트 · AlgoReport · 2025.04</p>
-    <div class="modal__tags">
-      <span class="tag tag--category">아키텍처 설계</span>
-      <span class="tag">Kotlin</span><span class="tag">Spring Boot</span><span class="tag">Kafka</span><span class="tag">PostgreSQL</span><span class="tag">Debezium</span>
-    </div>
-
-    <section class="modal__section">
-      <h3>아키텍처</h3>
-      <img class="modal__arch-img" src="images/saga-architecture.png" alt="Saga & Outbox 패턴 아키텍처">
-    </section>
-
-    <section class="modal__section">
-      <h3>기술 선택 이유</h3>
-      <p>여러 모듈에 걸친 비즈니스 로직(사용자 가입 → 프로필 생성 → 환영 알림)에서 단일 ACID 트랜잭션으로는 데이터 정합성을 보장할 수 없었습니다.</p>
-      <p><strong>2PC(Two-Phase Commit)</strong>는 분산 환경에서 단일 장애점 문제와 가용성 저하가 우려되어 제외. 대신 <strong>Saga 패턴(Orchestration 기반)</strong>을 선택하여 각 로컬 트랜잭션을 단계별로 실행하고 실패 시 보상 트랜잭션으로 최종 일관성을 보장하는 구조를 설계했습니다.</p>
-      <p>로컬 트랜잭션 커밋과 이벤트 발행의 원자성 문제를 해결하기 위해 <strong>Outbox 패턴 + Debezium</strong> 조합을 도입. outbox_events 테이블에 이벤트를 DB 트랜잭션으로 함께 저장하고, Debezium이 폴링하여 Kafka로 발행하는 At-Least-Once 보장 구조를 구현했습니다.</p>
-    </section>
-
-    <section class="modal__section">
-      <h3>성과</h3>
-      <p>특정 모듈 장애가 전체 시스템의 데이터 불일치로 확산되는 것을 방지하여 회복탄력성(Resilience) 향상. 모듈 간 결합도를 낮추어 유지보수성 및 확장성 확보.</p>
-    </section>
-  </template>
 
   <footer class="footer">
     <p>&copy; 2025 채기훈. All rights reserved.</p>

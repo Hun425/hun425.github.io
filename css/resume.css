@@ -182,6 +182,75 @@ body {
   white-space: nowrap;
 }
 
+/* 항목이 많은 경력은 페이지를 넘겨 이어지게 하고, 항목 단위로만 끊는다 */
+.exp--split { page-break-inside: auto; }
+.exp--split li { break-inside: avoid; }
+.exp__header,
+.exp__project,
+.exp__context { break-after: avoid; }
+
+.exp__context {
+  font-size: 8.5pt;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.lead {
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* v2: 항목 제목을 한 줄로 먼저 보이고, 설명은 다음 줄에 둔다 */
+.item-title {
+  display: block;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+/* v2: 섹션 제목이 페이지 끝에 홀로 남지 않도록 첫 항목과 묶는다 */
+.keep-together {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+/* v2: 주요 문제 해결을 세로 배치(라벨 | 본문)로 */
+.case {
+  margin-bottom: 12px;
+  page-break-inside: avoid;
+}
+
+.case__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
+.case__header h3 {
+  font-size: 10pt;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.case__body {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 3px 10px;
+}
+
+.case__body dt {
+  font-size: 8pt;
+  font-weight: 700;
+  color: #0891b2;
+  padding-top: 1px;
+}
+
+.case__body dd {
+  font-size: 9pt;
+  color: #333;
+  line-height: 1.55;
+}
+
 .exp__project {
   margin-bottom: 4px;
 }
@@ -214,6 +283,19 @@ li {
 li::marker { color: #0891b2; }
 
 strong { color: #0891b2; font-weight: 700; }
+
+a { color: inherit; text-decoration: none; }
+
+/* 한글 단어 중간이나 숫자와 단위 사이에서 줄이 갈리지 않게 */
+.exp li { word-break: keep-all; }
+
+/* PR·이슈 번호는 누를 수 있다는 것만 옅게 표시 */
+.exp li a {
+  text-decoration: underline;
+  text-decoration-color: #c4c4c4;
+  text-decoration-thickness: 0.5pt;
+  text-underline-offset: 2px;
+}
 
 /* ── PROJECTS (주요 과제) ── */
 .project {
